@@ -1,0 +1,38 @@
+<% if(collection.packages.length > 0) { %>
+  <table class="table table-dark table-hover search-results-table h-75 align-self-center">
+    <thead>
+      <tr>
+        <th>
+          Package Name
+        </th>
+        <th>
+          Version
+        </th>
+        <th>
+          Last Updated
+        </th>
+        <th>
+          View on NPM
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% collection.packages.forEach(package, { %>
+      <tr>
+        <td>
+          <pre><%= package.name %></pre>
+        </td>
+        <td>
+          <%= package.version %> 
+        </td>
+        <td>
+          <%= package.date %> 
+        </td>
+        <td>
+          <%= package.url %> 
+        </td>
+      </tr>
+      <% }) %>        
+    </tbody>
+  </table>
+  <% } %>

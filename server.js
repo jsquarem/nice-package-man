@@ -8,8 +8,9 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const methodOverride = require('method-override');
-const indexRoutes = require('./routes/index');
-
+const indexRouter = require('./routes/index');
+const collectionsRouter = require('./routes/collections');
+const packagesRouter = require('./routes/packages');
 
 // create the Express app
 const app = express();
@@ -18,8 +19,6 @@ const app = express();
 require('./config/database');
 // configure Passport
 require('./config/passport');
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,15 +31,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 // mount the session middleware
-app.use(session({
-  secret: process.env.SECRET,
-  resave: false,
-  saveUninitialized: true
-}));
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 // Add this middleware BELOW passport middleware
 app.use(function (req, res, next) {
@@ -50,11 +50,12 @@ app.use(function (req, res, next) {
 });
 
 // mount all routes with appropriate base paths
-app.use('/', indexRoutes);
-
+app.use('/', indexRouter);
+app.use('/collections', collectionsRouter);
+app.use('/', packagesRouter);
 
 // invalid request, send 404 page
-app.use(function(req, res) {
+app.use(function (req, res) {
   res.status(404).send('Cant find that!');
 });
 

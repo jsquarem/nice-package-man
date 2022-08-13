@@ -1,0 +1,26 @@
+<%- include('../partials/header') %>
+<h2 class="text-center">Package:</h2>
+<div class="col-8 offset-2">
+  <div class="row text-center package-info">
+    <div class="col-4">
+      Version: <%= package.version %>
+    </div>
+    <div class="col-4">
+      <%= package.name %>
+    </div>
+    <div class="col-4">
+      Updated: <%= package.date.toLocaleString(); %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6 offset-3">
+    <form id="editCollection" action="/packages/<%= package._id %>" method="POST"></form>
+        <div class="form-group mb-3">
+          <label for="description">Description</label>
+          <textarea class="form-control" id="collection-description" name="description" rows="3"><%= %></textarea>
+        </div>
+    </form>
+  </div>
+</div>
+<%- include('../partials/footer') %>

@@ -20,7 +20,7 @@ const snippetSchema = new mongoose.Schema(
   }
 );
 
-const collectionSchema = new mongoose.Schema(
+const packageSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -31,7 +31,7 @@ const collectionSchema = new mongoose.Schema(
       required: true,
       default: '0.0.0',
     },
-    lastUpdate: {
+    date: {
       type: Date,
       required: true,
     },
@@ -39,12 +39,8 @@ const collectionSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    packageUrl: {
+    url: {
       type: String,
-      required: true,
-    },
-    downloads: {
-      type: Number,
       required: true,
     },
     repositories: [],
@@ -55,4 +51,4 @@ const collectionSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Collection', collectionSchema);
+module.exports = mongoose.model('Package', packageSchema);

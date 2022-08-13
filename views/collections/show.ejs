@@ -1,0 +1,76 @@
+<%- include('../partials/header') %>
+<h2 class="text-center">Collection:</h2>
+<h3 class="text-center"><%= collection.name %> </h3>
+<div class="row">
+  <div class="col-6 offset-3">
+    <form id="editCollection" action="/collections/<%= collection._id %>" method="POST"></form>
+        <div class="form-group mb-3">
+          <label for="description">Description</label>
+          <textarea class="form-control" id="collection-description" name="description" rows="3"><%= collection.description %></textarea>
+        </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6 offset-3">
+    <form id="searchPackagesForm" action="" method="POST"></form>
+      <div class="input-group mb-3">
+        <input id="searchPackagesInput" type="text" class="form-control" placeholder="NPM Package name" aria-label="NPM Package name" aria-describedby="package-name">
+        <button id="searchPackagesButton" class="btn btn-outline-secondary" type="submit">Search Package</button>
+      </div>
+    </form>
+  </div>
+</div>
+<section class="results">
+  <div class="row">
+    <div id="searchResults" class="col-6 offset-3">
+      <div class="stats text-center" id="stats">
+        &nbsp;
+      </div>
+    </div>
+  </div>
+</section>
+<div class="row">
+  <div class="col-6 offset-3">
+    <% if(collection.packages.length > 0) { %>
+    <table class="table table-dark table-hover align-self-center">
+      <thead>
+        <tr>
+          <th>
+            Package Name
+          </th>
+          <th>
+            Version
+          </th>
+          <th>
+            Last Updated
+          </th>
+          <th>
+            View on NPM
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% collection.packages.forEach((package) => { %>
+        <tr>
+          <td>
+            <code><a href="/packages/<%= package._id %>" class="d-flex text-decoration-none h-100 align-items-center"><%= package.name %></a><code>
+          </td>
+          <td>
+            <%= package.version %> 
+          </td>
+          <td>
+            <%= package.date.toLocaleString(); %> 
+          </td>
+          <td>
+            <a href="<%= package.url %>">View on NPM</a>
+          </td>
+        </tr>
+        <% }) %>        
+      </tbody>
+    </table>
+    <% } %>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
