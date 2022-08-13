@@ -8,8 +8,8 @@ const isLoggedIn = require('../config/auth.js');
 router.get('/', isLoggedIn, collectionController.index);
 router.get('/new', isLoggedIn, collectionController.new);
 // /movies
-router.get('/:id', collectionController.show);
+router.get('/:id', isLoggedIn, collectionController.show);
 
-router.post('/', collectionController.create);
+router.post('/', isLoggedIn, collectionController.create);
 
 module.exports = router;

@@ -14,9 +14,13 @@
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+    <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
   </head>
-  <body class="bg-dark">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    
+  <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">NP,M</a>
@@ -39,32 +43,22 @@
             <li class="nav-item">
               <a class="nav-link" href="/">Documentation</a>
             </li>
-          </ul>
           <% if (user) { %>
             <li class="nav-item">
-              <a class="nav-link" href="/">My Collections</a>
+              <a class="nav-link" href="/collections">My Collections</a>
             </li>
           </ul>
           <ul class="navbar-nav ml-auto text-bg-dark align-items-center">
             <li class="nav-item avatar">
-              <!-- <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false"> -->
-                <img src="<%= user.avatar %>" class="rounded-circle z-depth-0" style="width:33px;" alt="avatar image">
-              <!-- </a> -->
-              <!-- <div class="dropdown-menu dropdown-menu-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5">
-                <a class="dropdown-item" href="#">My Collections</a>
-                <a class="dropdown-item" href="/logout">Log Out</a>
-              </div> -->
+                <img src="<%= user.avatar %>" class="rounded-circle z-depth-0" style="width:33px;" alt="avatar image" referrerpolicy="no-referrer">
             </li>
             <li class="nav-item px-2">
               <a href="/logout" id="logged-in-link" class="nav-link text-bg-dark">Hey, <%= user.name %>!</a>
             </li>
           </ul>
-          <!-- <img src="https://lh3.googleusercontent.com/a-/AFdZucoq6hB9kHJaa4oLOn63gevagzqQLmBSuY6X2gCpIg=s96-c" class="rounded-circle d-block" style="width: 50px;" referrerpolicy="no-referrer" />
-          <a href="/logout" id="logged-in-link" class="nav-link text-bg-dark">Hey, <%= user.name %></a> -->
-
           <% } else { %>
-          <ul class="navbar-nav ml-auto text-bg-dark align-items-center"></ul>
+          </ul>
+          <ul class="navbar-nav ml-auto text-bg-dark align-items-center">
             <li class="nav-item">
               <a href="/auth/google" class="btn btn-secondary">Log In</a>
             </li>
@@ -73,4 +67,3 @@
         </div>
       </div>
     </nav>
-    <div class="container bg-dark text-bg-dark">

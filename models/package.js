@@ -10,10 +10,6 @@ const snippetSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    date: {
-      type: Date,
-      required: true,
-    },
   },
   {
     timestamps: true,
@@ -43,6 +39,7 @@ const packageSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     repositories: [],
     snippets: [snippetSchema],
   },

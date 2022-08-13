@@ -1,72 +1,82 @@
 <%- include('../partials/header') %>
-<h2 class="text-center">My Collections</h2>
-<div class="row">
-  <div class="col-8 offset-2">
-    <%  collections.forEach((collection) => { %>
-      <h3><%= collection.name %></h3>
-      <div class="row">
-      <% if(collection.packages.length > 0) { %>
-      <table class="table table-dark table-hover mb-5 bg-secondary">
-      <thead>
-        <tr>
-          <th>
-            Package Name
-          </th>
-          <th>
-            Version
-          </th>
-          <th>
-            Last Updated
-          </th>
-          <th>
-            View on NPM
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <% let maxLength = 4;
-        if(collection.packages.length < 4) maxLength = collection.packages.length;
-        for(i = 0; i < maxLength; i++) { %>
-        <tr>
-          <td>
-            <code><a href="/packages/<%= collection.packages[i]._id %>" class="d-flex text-decoration-none h-100 align-items-center">
-            <%= collection.packages[i].name %></a><code>
-          </td>
-          <td>
-            <%= collection.packages[i].version %> 
-          </td>
-          <td>
-            <%= collection.packages[i].date.toLocaleString(); %> 
-          </td>
-          <td>
-            <a href="<%= collection.packages[i].url %>">View on NPM</a>
-          </td>
-        </tr>
-        <%
-              } %>
-          <% if(collection.packages.length > 4) { %>
-            <tr>
-            <td colspan="4">
-                <a href="/collections/<%= collection._id %>" class="d-flex text-decoration-none align-items-center justify-content-center">+<%= collection.packages.length-4 %> more packages -></a>           
-            </td>
-            <tr>
-          <% } else { %>
+<div class="container">
+  <h2 class="text-center">My Collections</h2>
+  <% if(!collections.length) { %>
+    <div class="row">
+      <div class="col-8 offset-2 text-center pt-5">
+        <h4 class="mb-5">You don't have any active collections, get started now: </h4>
+        <a href="/collections/new" class="btn btn-primary btn-lg">Add Collection</a>
+      </div>
+    </div>
+  <% } %>
+  <div class="row">
+    <div class="col-8 offset-2 card bg-dark p-4">
+      <%  collections.forEach((collection) => { %>
+        <h3><%= collection.name %></h3>
+        <div class="row">
+        <% if(collection.packages.length > 0) { %>
+        <table class="table table-dark table-hover mb-5 bg-secondary">
+        <thead>
           <tr>
-            <td colspan="4">
-              <a href="/collections/<%= collection._id %>" class="d-flex text-decoration-none align-items-center justify-content-center">Add more packages -></a>         
+            <th>
+              Package Name
+            </th>
+            <th>
+              Version
+            </th>
+            <th>
+              Last Updated
+            </th>
+            <th>
+              View on NPM
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% let maxLength = 4;
+          if(collection.packages.length < 4) maxLength = collection.packages.length;
+          for(i = 0; i < maxLength; i++) { %>
+          <tr>
+            <td>
+              <code><a href="/packages/<%= collection.packages[i]._id %>" class="d-flex text-decoration-none h-100 align-items-center">
+              <%= collection.packages[i].name %></a><code>
+            </td>
+            <td>
+              <%= collection.packages[i].version %> 
+            </td>
+            <td>
+              <%= collection.packages[i].date.toLocaleString(); %> 
+            </td>
+            <td>
+              <a href="<%= collection.packages[i].url %>">View on NPM</a>
             </td>
           </tr>
-          <% } %>      
-      </tbody>
-    </table>
-    <% } else { %>
-      <div class="col-8 offset-2 text-center">
-      <h3>This collection is empty.</h3>
-      <a href="/collections/<%= collection._id %>" class="btn btn-primary">Add Packages</a>
-      </div>
-    <% } %>
-      </div>
-    <% }) %>
+          <%
+                } %>
+            <% if(collection.packages.length > 4) { %>
+              <tr>
+              <td colspan="4">
+                  <a href="/collections/<%= collection._id %>" class="d-flex text-decoration-none align-items-center justify-content-center">+<%= collection.packages.length-4 %> more packages -></a>           
+              </td>
+              <tr>
+            <% } else { %>
+            <tr>
+              <td colspan="4">
+                <a href="/collections/<%= collection._id %>" class="d-flex text-decoration-none align-items-center justify-content-center">Add more packages -></a>         
+              </td>
+            </tr>
+            <% } %>      
+        </tbody>
+      </table>
+      <% } else { %>
+        <div class="col-8 offset-2 text-center">
+        <h3>This collection is empty.</h3>
+        <a href="/collections/<%= collection._id %>" class="btn btn-primary">Add Packages</a>
+        </div>
+      <% } %>
+        </div>
+      <% }) %>
+    </div>
   </div>
 </div>
 

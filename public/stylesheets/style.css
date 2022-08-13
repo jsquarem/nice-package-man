@@ -1,3 +1,142 @@
+body {
+  background-color: rgb(83, 83, 83) !important;
+  color: #ffffff;
+}
+
+.bg-image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)),
+    url('/images/npm-hero.png');
+  /* url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp'); */
+  height: 60vh;
+
+  background-size: cover;
+  background-position: center;
+}
+.container {
+  background: rgb(83, 83, 83) !important;
+  padding: 20px;
+  min-height: 75vh;
+}
+
 .navbar-collapse {
   height: 60px;
+}
+
+.snippet-parent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.jumbotron {
+  color: white;
+  background-image: url('https://images.unsplash.com/photo-1438109491414-7198515b166b?q=80&fm=jpg&s=cbdabf7a79c087a0b060670a6d79726c');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+pre {
+  margin: 0;
+  background: #2b2b2b;
+  overflow: visible;
+  text-align: left;
+}
+
+.snippet {
+  height: 100%;
+}
+
+.snippet-version {
+  float: right;
+  color: #868686;
+}
+
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+code.hljs {
+  padding: 3px 5px;
+}
+/*!
+Theme: a11y-dark
+Author: @ericwbailey
+Maintainer: @ericwbailey
+
+Based on the Tomorrow Night Eighties theme: https://github.com/isagalaev/highlight.js/blob/master/src/styles/tomorrow-night-eighties.css
+*/
+.hljs {
+  background: #2b2b2b;
+  color: #f8f8f2;
+}
+.hljs-comment,
+.hljs-quote {
+  color: #d4d0ab;
+}
+.hljs-deletion,
+.hljs-name,
+.hljs-regexp,
+.hljs-selector-class,
+.hljs-selector-id,
+.hljs-tag,
+.hljs-template-variable,
+.hljs-variable {
+  color: #ffa07a;
+}
+.hljs-built_in,
+.hljs-link,
+.hljs-literal,
+.hljs-meta,
+.hljs-number,
+.hljs-params,
+.hljs-type {
+  color: #f5ab35;
+}
+.hljs-attribute {
+  color: gold;
+}
+.hljs-addition,
+.hljs-bullet,
+.hljs-string,
+.hljs-symbol {
+  color: #abe338;
+}
+.hljs-section,
+.hljs-title {
+  color: #00e0e0;
+}
+.hljs-keyword,
+.hljs-selector-tag {
+  color: #dcc6e0;
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: 700;
+}
+@media screen and (-ms-high-contrast: active) {
+  .hljs-addition,
+  .hljs-attribute,
+  .hljs-built_in,
+  .hljs-bullet,
+  .hljs-comment,
+  .hljs-link,
+  .hljs-literal,
+  .hljs-meta,
+  .hljs-number,
+  .hljs-params,
+  .hljs-quote,
+  .hljs-string,
+  .hljs-symbol,
+  .hljs-type {
+    color: highlight;
+  }
+  .hljs-keyword,
+  .hljs-selector-tag {
+    font-weight: 700;
+  }
 }

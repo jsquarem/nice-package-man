@@ -1,23 +1,25 @@
 <%- include('../partials/header') %>
-<h2 class="text-center">Create New Collection</h2>
-<div class="col-md-6 offset-3">
-  <form id="new-collection-form" action="/collections" method="POST">
-    <div class="form-row">
-      <div class="form-group mb-3">
-        <label for="name">Name</label>
-        <input class="form-control" type="text" id="collection-name" name="name" required />
+<div class="container">
+  <h2 class="text-center">Create New Collection</h2>
+  <div class="col-md-6 offset-3">
+    <form id="new-collection-form" action="/collections" method="POST">
+      <div class="form-row">
+        <div class="form-group mb-3">
+          <label for="name">Name</label>
+          <input class="form-control" type="text" id="collection-name" name="name" required />
+        </div>
       </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group mb-3">
-        <label for="description">Description</label>
-        <textarea class="form-control" id="collection-description" name="description" rows="3"></textarea>
+      <div class="form-row">
+        <div class="form-group mb-3">
+          <label for="description">Description</label>
+          <textarea class="form-control" id="collection-description" name="description" rows="3"></textarea>
+        </div>
       </div>
-    </div>
-    <div class="form-row text-right">
-      <button type="submit" class="btn btn-secondary float-end">Create</button>
-    </div>
-    </div>
-  </form>
+      <div class="form-row text-right">
+        <button type="submit" class="btn btn-secondary float-end">Create</button>
+      </div>
+      </div>
+    </form>
+  </div>
 </div>
 <%- include('../partials/footer') %>

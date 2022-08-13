@@ -1,5 +1,6 @@
 export const deleteSearchResults = () => {
   const searchTable = document.getElementById('searchResultsTable');
+  console.log(searchTable, '<-searchTable');
   if (searchTable) searchTable.remove();
 };
 
@@ -39,6 +40,9 @@ const createSearchResultsTable = () => {
     'search-results-table',
     'h-75',
     'align-self-center',
+    'rounded',
+    'border',
+    'border-secondary',
   ];
   searchResultsTable.id = 'searchResultsTable';
   searchResultsTable.classList.add(...classArray);

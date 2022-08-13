@@ -23,11 +23,15 @@ async function create(req, res) {
 
 async function show(req, res) {
   try {
+    const collectionDocuments = await Collection.find({
+      packages: req.params.id,
+    });
     const packageDocument = await Package.findById(req.params.id)
       //.populate('packages')
       .exec();
     res.render('packages/show', {
       package: packageDocument,
+      collections: collectionDocuments,
     });
   } catch (err) {
     res.send(err);

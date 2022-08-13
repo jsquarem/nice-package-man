@@ -12,6 +12,7 @@ const indexRouter = require('./routes/index');
 const collectionsRouter = require('./routes/collections');
 const packagesRouter = require('./routes/packages');
 const repositoriesRouter = require('./routes/repositories');
+const snippetsRouter = require('./routes/snippets');
 
 // create the Express app
 const app = express();
@@ -55,6 +56,7 @@ app.use('/', indexRouter);
 app.use('/collections', collectionsRouter);
 app.use('/', packagesRouter);
 app.use('/', repositoriesRouter);
+app.use('/', snippetsRouter);
 
 // invalid request, send 404 page
 app.use(function (req, res) {
