@@ -5,7 +5,14 @@
       <div class="text-white">
         <h1 class="mb-3">Nice Package, Man</h1>
         <h4 class="mb-3">A tool to simplify your tools</h4>
-        <a class="btn btn-outline-light btn-lg" href="#!" role="button">Get Started</a>
+        <% let actionURL; 
+        if(user) { 
+          actionURL = '/collections'; 
+        } else { 
+          actionURL = '/auth/google/'; 
+        } 
+        %>
+        <a class="btn btn-outline-light btn-lg" href="<%= actionURL %>" role="button">Get Started</a>
       </div>
     </div>
 </div>

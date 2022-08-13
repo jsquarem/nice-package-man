@@ -6,8 +6,7 @@ body {
 .bg-image {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)),
     url('/images/npm-hero.png');
-  /* url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp'); */
-  height: 60vh;
+  height: 94vh;
 
   background-size: cover;
   background-position: center;
@@ -39,7 +38,7 @@ body {
 
 pre {
   margin: 0;
-  background: #2b2b2b;
+  background: #212529;
   overflow: visible;
   text-align: left;
 }
@@ -53,7 +52,22 @@ pre {
   color: #868686;
 }
 
-pre code.hljs {
+.package-info {
+  font-size: 1em;
+}
+
+.package-info-name {
+  font-size: 3em;
+  color: rgb(206, 117, 15);
+  font-family: monospace;
+}
+
+.table-package-name a {
+  color: rgb(206, 117, 15);
+  font-family: monospace;
+}
+
+.pre code.hljs {
   display: block;
   overflow-x: auto;
   padding: 1em;
@@ -69,7 +83,8 @@ Maintainer: @ericwbailey
 Based on the Tomorrow Night Eighties theme: https://github.com/isagalaev/highlight.js/blob/master/src/styles/tomorrow-night-eighties.css
 */
 .hljs {
-  background: #2b2b2b;
+  /* background: #2b2b2b; */
+  background: #212529;
   color: #f8f8f2;
 }
 .hljs-comment,

@@ -8,14 +8,14 @@
         <a href="/collections/new" class="btn btn-primary btn-lg">Add Collection</a>
       </div>
     </div>
-  <% } %>
-  <div class="row">
-    <div class="col-8 offset-2 card bg-dark p-4">
+  <% } else { %>
+  <div class="row">    
       <%  collections.forEach((collection) => { %>
+        <div class="col-8 offset-2 card bg-dark p-4 mb-3">
         <h3><%= collection.name %></h3>
         <div class="row">
         <% if(collection.packages.length > 0) { %>
-        <table class="table table-dark table-hover mb-5 bg-secondary">
+        <table class="table table-dark table-hover mb-0 bg-secondary">
         <thead>
           <tr>
             <th>
@@ -37,9 +37,9 @@
           if(collection.packages.length < 4) maxLength = collection.packages.length;
           for(i = 0; i < maxLength; i++) { %>
           <tr>
-            <td>
+            <td class="table-package-name">
               <code><a href="/packages/<%= collection.packages[i]._id %>" class="d-flex text-decoration-none h-100 align-items-center">
-              <%= collection.packages[i].name %></a><code>
+              <span class="text-primary"><</span>&nbsp;&nbsp;<%= collection.packages[i].name %></a><code>
             </td>
             <td>
               <%= collection.packages[i].version %> 
@@ -48,7 +48,7 @@
               <%= collection.packages[i].date.toLocaleString(); %> 
             </td>
             <td>
-              <a href="<%= collection.packages[i].url %>">View on NPM</a>
+              <a href="<%= collection.packages[i].url %>" class="text-info text-decoration-none">View on NPM</a>
             </td>
           </tr>
           <%
@@ -74,9 +74,16 @@
         <a href="/collections/<%= collection._id %>" class="btn btn-primary">Add Packages</a>
         </div>
       <% } %>
-        </div>
-      <% }) %>
+        </div>             
     </div>
+    </div>
+      <% }) %> 
+    <div class="row">
+      <div class="col-8 offset-2 text-center">
+        <a href="/collections/new" class="btn btn-primary btn-lg">Add More Collections</a>
+      </div>
+    </div>
+    <% } %>
   </div>
 </div>
 

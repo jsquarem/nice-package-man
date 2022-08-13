@@ -2,16 +2,16 @@
 <div class="container">
   <div class="row">
     <h2 class="text-center">Package:</h2>
-    <div class="col-8 offset-2">
+    <div class="col-12">
       <div class="row package-info">
-        <div class="col-4 text-left">
+        <div class="col-4">
           Version: <%= package.version %>
         </div>
-        <div class="col-4 text-center">
+        <div class="col-4 text-center package-info-name">
           <%= package.name %>
         </div>
-        <div class="col-4 text-right">
-          Updated: <%= package.date.toLocaleString(); %>
+        <div class="col-4">
+          <span class="align-text-center">Updated: <%= package.date.toLocaleString(); %></span>
         </div>
       </div>
     </div>
@@ -45,26 +45,28 @@
               Hide Repositories
           </a>
           <div class="collapse show" id="repositoryCollapse">
-            <div class="bg-dark">
+            <div>
               <form id="addRepositoryForm" action="/packages/<%= package._id %>/repositories" method="POST">
                 <div class="input-group mb-3">
                   <input type="text" class="form-control" placeholder="Add code repository" aria-label="Add code repository" name="url">
-                  <button class="btn btn-outline-secondary" type="submit">Add Repo</button>
+                  <button class="btn btn-primary" type="submit">Add Repo</button>
                 </div>
               </form>
               <% if(package.repositories.length) { %>
-                <table class="table table-dark table-hover align-self-center">
-                  <% for(let i = 0; i < package.repositories.length; i++) { %>
-                  <tr>
-                    <td>
-                      <a href="<%= package.repositories[i] %>" class="text-info text-decoration-none" target="_blank"><%= package.repositories[i] %></a>
-                    </td>
-                    <td>
-                      <a href="/packages/<%= package._id %>/repositories/<%= i %>" class="text-danger text-decoration-none">delete</a>
-                    </td>
-                  </tr>
-                  <% } %>
-                </table>
+                <div class="card bg-dark mb-3">
+                  <table class="table table-dark table-hover align-self-center mb-0">
+                    <% for(let i = 0; i < package.repositories.length; i++) { %>
+                    <tr>
+                      <td>
+                        <a href="<%= package.repositories[i] %>" class="text-info text-decoration-none" target="_blank"><%= package.repositories[i] %></a>
+                      </td>
+                      <td class="text-center">
+                        <a href="/packages/<%= package._id %>/repositories/<%= i %>" class="text-danger text-decoration-none">delete</a>
+                      </td>
+                    </tr>
+                    <% } %>
+                  </table>
+                </div>
               <% } %>
             </div>
           </div>
@@ -77,16 +79,17 @@
               Hide Code Snippets
           </a>
           <div class="collapse show" id="snippetCollapse">
-            <div class="bg-dark">
+            <div class="">
               <form id="addRepositoryForm" action="/packages/<%= package._id %>/snippets" method="POST">
                 <div class="input-group mb-3">
                   <textarea type="text" class="form-control" placeholder="Add code snippet" aria-label="Add code snippet"  rows="4" name="snippet"></textarea>
                   <input class="form-control" type="text" name="currentPackageVersion" value="<%= package.version %>" hidden />
-                  <button class="btn btn-outline-secondary" type="submit">Add Repo</button>
+                  <button class="btn btn-primary" type="submit">Add Snippet</button>
                 </div>
               </form>
               <% if(package.snippets.length) { %>
-                <table class="table table-dark table-hover align-self-center w-100">
+                <div class="bg-dark card p-0">
+                <table class="table table-dark table-hover align-self-center w-100 m-0">
                   <% for(let i = 0; i < package.snippets.length; i++) { %>
                   <tr>
                     <td class="p-0">
@@ -103,6 +106,7 @@
                   </tr>
                   <% } %>
                 </table>
+                </div>
               <% } %>
             </div>
           </div>

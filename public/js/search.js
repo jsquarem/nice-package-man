@@ -12,13 +12,6 @@ button.addEventListener('click', (event) => {
   submitTheSearch(event);
 });
 
-// const input = document.getElementById('searchPackagesInput');
-// input.addEventListener('keyup', (event) => {
-//   if (event.key === 'Enter') {
-//     submitTheSearch(event);
-//   }
-// });
-
 const submitTheSearch = (event) => {
   event.preventDefault();
   deleteSearchResults();

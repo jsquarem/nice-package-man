@@ -3,7 +3,7 @@
   <h2 class="text-center">Collection:</h2>
   <h3 class="text-center"><%= collection.name %> </h3>
   <div class="row">
-    <div class="col-6 offset-3">
+    <div class="col-6 offset-3 p-0">
       <form id="editCollection" action="/collections/<%= collection._id %>" method="POST">
           <div class="form-group mb-3">
             <label for="description">Description</label>
@@ -13,7 +13,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-6 offset-3">
+    <div class="col-6 offset-3 p-0">
       <form id="searchPackagesForm" action="" method="POST">
         <div class="input-group mb-3">
           <input id="searchPackagesInput" type="text" class="form-control" placeholder="NPM Package name" aria-label="NPM Package name" aria-describedby="package-name">
@@ -32,9 +32,9 @@
     </div>
   </section>
   <div class="row">
-    <div class="col-6 offset-3">
+    <div class="col-8 offset-2 card bg-dark">
       <% if(collection.packages.length > 0) { %>
-      <table class="table table-dark table-hover align-self-center">
+      <table class="table table-dark table-hover align-self-center m-0 p-0">
         <thead>
           <tr>
             <th>
@@ -49,13 +49,16 @@
             <th>
               View on NPM
             </th>
+            <th>
+              
+            </th>
           </tr>
         </thead>
         <tbody>
           <% collection.packages.forEach((package) => { %>
           <tr>
-            <td>
-              <code><a href="/packages/<%= package._id %>" class="d-flex text-decoration-none h-100 align-items-center"><%= package.name %></a><code>
+            <td class="table-package-name">
+              <a href="/packages/<%= package._id %>" class="d-flex text-decoration-none h-100"><span class="text-primary"><</span>&nbsp;&nbsp;<%= package.name %></a>
             </td>
             <td>
               <%= package.version %> 
@@ -64,7 +67,10 @@
               <%= package.date.toLocaleString(); %> 
             </td>
             <td>
-              <a href="<%= package.url %>">View on NPM</a>
+              <a href="<%= package.url %>" class="text-decoration-none text-info">View on NPM</a>
+            </td>
+            <td>
+              <a href="/collections/<%= collection._id %>/packages/<%= package._id %>" class="text-decoration-none text-danger">remove</a>
             </td>
           </tr>
           <% }) %>        
