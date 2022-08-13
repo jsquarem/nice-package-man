@@ -3,7 +3,7 @@
 <h3 class="text-center"><%= collection.name %> </h3>
 <div class="row">
   <div class="col-6 offset-3">
-    <form id="editCollection" action="/collections/<%= collection._id %>" method="POST"></form>
+    <form id="editCollection" action="/collections/<%= collection._id %>" method="POST">
         <div class="form-group mb-3">
           <label for="description">Description</label>
           <textarea class="form-control" id="collection-description" name="description" rows="3"><%= collection.description %></textarea>
@@ -13,7 +13,7 @@
 </div>
 <div class="row">
   <div class="col-6 offset-3">
-    <form id="searchPackagesForm" action="" method="POST"></form>
+    <form id="searchPackagesForm" action="" method="POST">
       <div class="input-group mb-3">
         <input id="searchPackagesInput" type="text" class="form-control" placeholder="NPM Package name" aria-label="NPM Package name" aria-describedby="package-name">
         <button id="searchPackagesButton" class="btn btn-outline-secondary" type="submit">Search Package</button>

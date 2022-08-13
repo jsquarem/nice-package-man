@@ -1,14 +1,14 @@
 <%- include('../partials/header') %>
 <h2 class="text-center">Package:</h2>
 <div class="col-8 offset-2">
-  <div class="row text-center package-info">
-    <div class="col-4">
+  <div class="row package-info">
+    <div class="col-4 text-left">
       Version: <%= package.version %>
     </div>
-    <div class="col-4">
+    <div class="col-4 text-center">
       <%= package.name %>
     </div>
-    <div class="col-4">
+    <div class="col-4 text-right">
       Updated: <%= package.date.toLocaleString(); %>
     </div>
   </div>
@@ -23,4 +23,89 @@
     </form>
   </div>
 </div>
+<div class="row">
+  <div class="col-6 offset-3">
+    <a class="btn btn-secondary mb-2" id="snippetCollapseBtn" data-bs-toggle="collapse" href="#snippetCollapse" role="button" aria-expanded="false" aria-controls="snippetCollapse">
+        Hide Code Snippets
+    </a>
+    <div class="collapse show" id="snippetCollapse">
+      <div class="bg-dark">
+        <form id="addRepositoryForm" action="/packages/<%= package._id %>/snippets" method="POST">
+          <div class="input-group mb-3">
+            <textarea type="text" class="form-control" placeholder="Add code snippet" aria-label="Add code snippet"  rows="4" name="url"></textarea>
+            <button class="btn btn-outline-secondary" type="submit">Add Repo</button>
+          </div>
+        </form>
+        <% if(package.snippets.length) { %>
+          <table class="table table-dark table-hover align-self-center">
+            <% for(let i = 0; i < package.snippets.length; i++) { %>
+            <tr>
+              <td>
+                <a href="<%= package.snippets[i] %>" class="text-info text-decoration-none" target="_blank"><%= package.snippets[i] %></a>
+              </td>
+              <td>
+                <a href="/packages/<%= package._id %>/snippets/<%= i %>" class="text-danger text-decoration-none">delete</a>
+              </td>
+            </tr>
+            <% } %>
+          </table>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6 offset-3">
+    <a class="btn btn-secondary mb-2" id="repositoryCollapseBtn" data-bs-toggle="collapse" href="#repositoryCollapse" role="button" aria-expanded="false" aria-controls="repositoryCollapse">
+        Hide Repositories
+    </a>
+    <div class="collapse show" id="repositoryCollapse">
+      <div class="bg-dark">
+        <form id="addRepositoryForm" action="/packages/<%= package._id %>/repositories" method="POST">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Add code repository" aria-label="Add code repository" name="url">
+            <button class="btn btn-outline-secondary" type="submit">Add Repo</button>
+          </div>
+        </form>
+        <% if(package.repositories.length) { %>
+          <table class="table table-dark table-hover align-self-center">
+            <% for(let i = 0; i < package.repositories.length; i++) { %>
+            <tr>
+              <td>
+                <a href="<%= package.repositories[i] %>" class="text-info text-decoration-none" target="_blank"><%= package.repositories[i] %></a>
+              </td>
+              <td>
+                <a href="/packages/<%= package._id %>/repositories/<%= i %>" class="text-danger text-decoration-none">delete</a>
+              </td>
+            </tr>
+            <% } %>
+          </table>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+<script 
+src="https://code.jquery.com/jquery-3.6.0.min.js" 
+integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+crossorigin="anonymous"></script> 
+<script>
+  $('#repositoryCollapseBtn').click(function() {
+  $(this).toggleClass( "active" );
+  if ($(this).hasClass("active")) {
+    $(this).text("Show Repositories");
+  } else {
+    $(this).text("Hide Repositories");
+  }
+});
+  $('#snippetCollapseBtn').click(function() {
+  $(this).toggleClass( "active" );
+  if ($(this).hasClass("active")) {
+    $(this).text("Show Code Snippets");
+  } else {
+    $(this).text("Hide Code Snippets");
+  }
+});
+
+</script>
 <%- include('../partials/footer') %>

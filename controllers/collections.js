@@ -1,6 +1,5 @@
 const Collection = require('../models/collection');
 const Package = require('../models/package');
-const { collection } = require('../models/user');
 
 module.exports = {
   new: newCollection,
