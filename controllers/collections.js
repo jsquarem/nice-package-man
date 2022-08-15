@@ -1,4 +1,8 @@
-const Collection = require('../models/collection');
+const {
+  createCollectionDocument,
+  findCollectionDocumentById,
+  findCollectionDocumentsByUserId,
+} = require('../models/collection');
 const Package = require('../models/package');
 
 const newCollection = (req, res) => {
@@ -7,7 +11,7 @@ const newCollection = (req, res) => {
 
 const index = async (req, res) => {
   try {
-    const collections = await findCollectionDocumentsByUserId(req, res);
+    const collections = await findCollectionDocumentsByUserId(req.params.user_id);
     return res.render('collections/index', { collections });
   } catch (err) {
     return res.redirect('/collections');
@@ -17,7 +21,7 @@ const index = async (req, res) => {
 const create = async (req, res) => {
   req.body.userId = req.user._id;
   try {
-    const collection = createCollectionDocument(req, res);
+    const collection = await createCollectionDocument(req.body);
     return res.redirect(`/collections/${collection._id}`);
   } catch (err) {
     return res.render('collections/new.ejs');
@@ -26,42 +30,10 @@ const create = async (req, res) => {
 
 const show = async (req, res) => {
   try {
-    const collection = await findCollectionDocumentById(req);
+    const collection = await findCollectionDocumentById(req.params.id);
     return res.render('collections/show', { collection, search: true });
   } catch (err) {
     return res.redirect('/collections');
-  }
-};
-
-// database logic
-const findCollectionDocumentById = async (req, res) => {
-  try {
-    const collectionDocument = await Collection.findById(req.params.id)
-      .populate('packages')
-      .exec();
-    return collectionDocument;
-  } catch (err) {
-    return res.send(err);
-  }
-};
-
-const findCollectionDocumentsByUserId = async (req, res) => {
-  try {
-    const collectionDocuments = await Collection.find({ userId: req.user._id })
-      .populate('packages')
-      .exec();
-    return collectionDocuments;
-  } catch (err) {
-    return res.send(err);
-  }
-};
-
-const createCollectionDocument = async (req, res) => {
-  try {
-    const collectionDocument = await Collection.create(req.body);
-    return collectionDocument;
-  } catch (err) {
-    return res.send(err);
   }
 };
 
@@ -70,7 +42,4 @@ module.exports = {
   create,
   index,
   show,
-  findCollectionDocumentById,
-  findCollectionDocumentsByUserId,
-  createCollectionDocument,
 };
