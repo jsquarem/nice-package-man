@@ -1,6 +1,18 @@
 const Collection = require('../models/collection');
 const Package = require('../models/package');
 
+const index = async (req, res) => {
+  req.body.userId = req.user._id;
+  try {
+    const packageDocuments = await Package.find({ userId: req.user._id });
+    return res.render('packages/index', {
+      packages: packageDocuments,
+    });
+  } catch (err) {
+    return res.send(err);
+  }
+};
+
 const create = async (req, res) => {
   const collectionId = req.params.id;
   req.body.userId = req.user._id;
@@ -63,4 +75,5 @@ module.exports = {
   create,
   show,
   removeFromCollection,
+  index,
 };
