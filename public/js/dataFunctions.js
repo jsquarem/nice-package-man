@@ -38,6 +38,7 @@ const processNPMResults = (results) => {
       date: result.package.date,
       score: result.searchScore,
       url: result.package.links.npm,
+      description: result.package.description
     };
     resultArray.push(item);
   });

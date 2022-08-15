@@ -31,7 +31,7 @@ const packageSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
-    note: {
+    description: {
       type: String,
       required: false,
     },

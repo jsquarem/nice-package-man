@@ -5,7 +5,7 @@
                           <div class="row">
                             <div class="col-8 offset-2 text-center pt-5">
                               <h4 class="mb-5">You don't have any active collections, get started now: </h4>
-                              <a href="/collections/new" class="btn btn-primary btn-lg">Add Collection</a>
+                              <a href="/collections/new" class="btn btn-secondary btn-lg border-dark">Add Collection</a>
                             </div>
                           </div>
   <% } else { %>
@@ -39,7 +39,7 @@
                                     <tr>
                                       <td class="table-package-name">
                                         <code><a href="/packages/<%= collection.packages[i]._id %>" class="d-flex text-decoration-none h-100 align-items-center">
-                                        <span class="text-primary"><</span>&nbsp;&nbsp;<%= collection.packages[i].name %></a><code>
+                                        <span class="text-primary"><i class="bi bi-arrow-left"></i></span>&nbsp;&nbsp;<%= collection.packages[i].name %></a><code>
                                       </td>
                                       <td>
                                         <%= collection.packages[i].version %> 
@@ -48,7 +48,7 @@
                                         <%= collection.packages[i].date.toLocaleString(); %> 
                                       </td>
                                       <td>
-                                        <a href="<%= collection.packages[i].url %>" class="text-info text-decoration-none">View on NPM</a>
+                                        <a href="<%= collection.packages[i].url %>" class="text-info text-decoration-none">View on NPM&nbsp;&nbsp;<i class="bi bi-arrow-right"></i></a>
                                       </td>
                                     </tr>
                                     <%
@@ -62,7 +62,7 @@
             <% } else { %>
                                     <tr>
                                       <td colspan="4">
-                                        <a href="/collections/<%= collection._id %>" class="d-flex text-decoration-none align-items-center justify-content-center">Add more packages -></a>         
+                                        <a href="/collections/<%= collection._id %>" class="d-flex text-decoration-none align-items-center justify-content-center"><i class="bi bi-arrow-left"></i>&nbsp;&nbsp;Add more packages</a>         
                                       </td>
                                     </tr>
             <% } %>      
@@ -72,7 +72,7 @@
                               </div>
                               <div class="col-12 text-center">
                               <h3>This collection is empty.</h3>
-                              <a href="/collections/<%= collection._id %>" class="btn btn-primary">Add Packages</a>
+                              <a href="/collections/<%= collection._id %>" class="btn btn-secondary border-dark">Add Packages</a>
                               </div>
       <% } %>
                             </div>             
@@ -91,7 +91,7 @@
       <% }) %> 
       <div class="row">
   <div class="col-12 text-center">
-    <a href="/collections/new" class="btn btn-primary btn-lg">Add More Collections</a>
+    <a href="/collections/new" class="btn btn-secondary btn-lg border-dark">Add More Collections</a>
   </div>
 </div>
     <% } %>

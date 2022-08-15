@@ -4,20 +4,24 @@
   <h3 class="text-center"><%= collection.name %> </h3>
   <div class="row">
     <div class="col-6 offset-3 p-0">
-      <form id="editCollection" action="/collections/<%= collection._id %>" method="POST">
+      <label for="description">Description</label>
+      <div id="collectionDescriptionCard" class="card bg-dark p-2 mb-3">
+        <%= collection.description %>
+        <!-- <i class="bi bi-pen"></i> -->
+      </div>
+      <!-- <form id="editCollection" action="/collections/<%= collection._id %>" method="POST">
           <div class="form-group mb-3">
-            <label for="description">Description</label>
             <textarea class="form-control" id="collection-description" name="description" rows="3"><%= collection.description %></textarea>
           </div>
-      </form>
+      </form> -->
     </div>
   </div>
   <div class="row">
     <div class="col-6 offset-3 p-0">
       <form id="searchPackagesForm" action="" method="POST">
         <div class="input-group mb-3">
-          <input id="searchPackagesInput" type="text" class="form-control" placeholder="NPM Package name" aria-label="NPM Package name" aria-describedby="package-name">
-          <button id="searchPackagesButton" class="btn btn-primary" type="submit">Search Package</button>
+          <input id="searchPackagesInput" type="text" class="form-control bg-secondary text-white border-dark" placeholder="NPM Package name" aria-label="NPM Package name" aria-describedby="package-name">
+          <button id="searchPackagesButton" class="btn btn-secondary border-dark" type="submit">Search Package</button>
         </div>
       </form>
     </div>
@@ -58,7 +62,7 @@
           <% collection.packages.forEach((package) => { %>
           <tr>
             <td class="table-package-name">
-              <a href="/packages/<%= package._id %>" class="d-flex text-decoration-none h-100"><span class="text-primary"><</span>&nbsp;&nbsp;<%= package.name %></a>
+              <a href="/packages/<%= package._id %>" class="d-flex text-decoration-none h-100"><span class="text-primary"><i class="bi bi-arrow-left"></i></span>&nbsp;&nbsp;<%= package.name %></a>
             </td>
             <td>
               <%= package.version %> 
@@ -67,7 +71,7 @@
               <%= package.date.toLocaleString(); %> 
             </td>
             <td>
-              <a href="<%= package.url %>" class="text-decoration-none text-info">View on NPM</a>
+              <a href="<%= package.url %>" class="text-decoration-none text-info">View on NPM&nbsp;&nbsp;<i class="bi bi-arrow-right"></i></a>
             </td>
             <td>
               <a href="/collections/<%= collection._id %>/packages/<%= package._id %>" class="text-decoration-none text-danger">remove</a>

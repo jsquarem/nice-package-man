@@ -67,6 +67,19 @@ pre {
   font-family: monospace;
 }
 
+#collectionDescriptionCard {
+  min-height: 6em;
+}
+
+#packageDescriptionCard {
+  min-height: 6em;
+}
+
+::placeholder {
+  color: white !important;
+  opacity: 0.5 !important;
+}
+
 .pre code.hljs {
   display: block;
   overflow-x: auto;

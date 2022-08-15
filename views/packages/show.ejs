@@ -3,21 +3,21 @@
   <div class="row">
     <h2 class="text-center">Package:</h2>
     <div class="col-12">
-      <div class="row package-info">
+      <div class="row package-info border-bottom pt-2 mb-3">
         <div class="col-4">
-          Version: <%= package.version %>
+          <p class="text-end mt-4">Version: <%= package.version %></p>
         </div>
-        <div class="col-4 text-center package-info-name">
+        <div class="col-4 text-center package-info-name pt-0">
           <%= package.name %>
         </div>
-        <div class="col-4">
-          <span class="align-text-center">Updated: <%= package.date.toLocaleString(); %></span>
+        <div class="col-4 pt-2 d-flex justify-content-between">
+          <div class="mt-3">Updated: <%= package.date.toLocaleString(); %></div><a href="<%= package.url %>" class="text-info text-decoration-none fs-2" target="_blank">NPM <i class="bi bi-arrow-right"></i></a>
         </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-2 offset-1 mt-5">
+    <div class="col-2">
     <h4>Collections:</h4>
       <div class="list-group">
         <% collections.forEach(collection => { %> 
@@ -28,15 +28,19 @@
 
 
     </div>
-    <div class="col-7 offset-1">
+    <div class="col-9 offset-1">
       <div class="row">
         <div class="col-12">
-          <form id="editCollection" action="/packages/<%= package._id %>" method="POST"></form>
+          <label for="description">Description</label>
+          <div id="packageDescriptionCard" class="card bg-dark p-2 mb-3">
+            <%= package.description %>
+            <!-- <i class="bi bi-pen"></i> -->
+          </div>
+          <!-- <form id="editCollection" action="/packages/<%= package._id %>" method="POST"></form>
               <div class="form-group mt-5 mb-3">
-                <label for="description">Description</label>
                 <textarea class="form-control" id="collection-description" name="description" rows="3"><%= %></textarea>
               </div>
-          </form>
+          </form> -->
         </div>
       </div>
       <div class="row">
@@ -48,8 +52,8 @@
             <div>
               <form id="addRepositoryForm" action="/packages/<%= package._id %>/repositories" method="POST">
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Add code repository" aria-label="Add code repository" name="url">
-                  <button class="btn btn-primary" type="submit">Add Repo</button>
+                  <input type="text" class="form-control bg-secondary text-white border-dark" placeholder="Add code repository" aria-label="Add code repository" name="url">
+                  <button class="btn btn-secondary border-dark" type="submit">Add Repo</button>
                 </div>
               </form>
               <% if(package.repositories.length) { %>
@@ -60,7 +64,7 @@
                       <td>
                         <a href="<%= package.repositories[i] %>" class="text-info text-decoration-none" target="_blank"><%= package.repositories[i] %></a>
                       </td>
-                      <td class="text-center">
+                      <td class="text-end px-3">
                         <a href="/packages/<%= package._id %>/repositories/<%= i %>" class="text-danger text-decoration-none">delete</a>
                       </td>
                     </tr>
@@ -82,9 +86,9 @@
             <div class="">
               <form id="addRepositoryForm" action="/packages/<%= package._id %>/snippets" method="POST">
                 <div class="input-group mb-3">
-                  <textarea type="text" class="form-control" placeholder="Add code snippet" aria-label="Add code snippet"  rows="4" name="snippet"></textarea>
+                  <textarea type="text" class="form-control bg-secondary text-white border-dark" placeholder="Add code snippet" aria-label="Add code snippet"  rows="4" name="snippet"></textarea>
                   <input class="form-control" type="text" name="currentPackageVersion" value="<%= package.version %>" hidden />
-                  <button class="btn btn-primary" type="submit">Add Snippet</button>
+                  <button class="btn btn-secondary text-center border-dark" type="submit">Add<br>&nbsp;&nbsp;Snippet&nbsp;&nbsp;</button>
                 </div>
               </form>
               <% if(package.snippets.length) { %>
@@ -99,7 +103,7 @@
                       </div>
                     </td>
                     <td>
-                      <div class="d-flex justify-content-center">
+                      <div class="text-end px-3">
                         <a href="/packages/<%= package._id %>/snippets/<%= i %>" class="text-danger text-decoration-none">delete</a>
                       </div>
                     </td>

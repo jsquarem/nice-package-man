@@ -1,7 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const collectionController = require('../controllers/collections');
+
 const isLoggedIn = require('../config/auth.js');
+// const isLoggedIn = (req, res, next) => {
+//   return next();
+// };
 
 router.get('/', isLoggedIn, collectionController.index);
 router.get('/new', isLoggedIn, collectionController.new);

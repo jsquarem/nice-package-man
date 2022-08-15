@@ -91,7 +91,7 @@ const createResultRow = (result) => {
     },
     outArrow: {
       result: result,
-      linkText: '->',
+      linkText: '&nbsp;&nbsp<i class="bi bi-arrow-right"></i>',
       classList: ['text-nowrap', 'text-info', 'p-1'],
     },
   };
@@ -104,16 +104,22 @@ const createResultRow = (result) => {
   }
   resultRow.appendChild(createResultButtonCell(linkData.button.result));
   resultRow.appendChild(createPackageCell(linkData.score));
-  resultRow.appendChild(createPackageCell(linkData.packageName));
+  resultRow.appendChild(
+    createPackageCell(linkData.packageName, result.description)
+  );
   resultRow.appendChild(createPackageCell(linkData.outArrow));
   return resultRow;
 };
 
 // Build Package link cells
-const createPackageCell = (linkData) => {
+const createPackageCell = (linkData, text = '') => {
   const packageCell = document.createElement('td');
   packageCell.classList.add('p-0');
   packageCell.appendChild(createPackageLink(linkData));
+  if (!text) return packageCell;
+  const additionalText = document.createElement('p');
+  additionalText.innerHTML = text;
+  packageCell.appendChild(additionalText);
   return packageCell;
 };
 
@@ -130,7 +136,7 @@ const createPackageLink = ({ result, linkText, classList }) => {
   packageLink.href = result.url;
   packageLink.target = '_blank';
   packageLink.classList.add(...classArray);
-  packageLink.textContent = linkText;
+  packageLink.innerHTML = linkText;
   return packageLink;
 };
 
