@@ -1,11 +1,6 @@
 const Package = require('../models/package');
 
-module.exports = {
-  create,
-  delete: deleteRepository,
-};
-
-async function create(req, res) {
+const create = async (req, res) => {
   const packageId = req.params.id;
   try {
     const packageDocument = await Package.findById(packageId);
@@ -15,9 +10,9 @@ async function create(req, res) {
   } catch (err) {
     return res.redirect(`/packages/${packageId}`);
   }
-}
+};
 
-async function deleteRepository(req, res) {
+const deleteRepository = async (req, res) => {
   const packageId = req.params.packageId;
   const repositoryIndex = req.params.repositoryIndex;
   try {
@@ -28,4 +23,9 @@ async function deleteRepository(req, res) {
   } catch (err) {
     return res.redirect(`/packages/${packageId}`);
   }
-}
+};
+
+module.exports = {
+  create,
+  delete: deleteRepository,
+};

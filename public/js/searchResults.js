@@ -1,6 +1,5 @@
 export const deleteSearchResults = () => {
   const searchTable = document.getElementById('searchResultsTable');
-  console.log(searchTable, '<-searchTable');
   if (searchTable) searchTable.remove();
 };
 
@@ -12,7 +11,7 @@ export const clearStatsLine = () => {
 export const setStatsLine = (numberOfResults) => {
   const statLine = document.getElementById('stats');
   if (numberOfResults) {
-    statLine.textContent = `Displaying ${numberOfResults} results.`;
+    statLine.textContent = `Displaying ${numberOfResults} results. Click Name to visit NPM page.`;
   } else {
     statLine.textContent = 'Sorry, no results.';
   }
@@ -43,42 +42,91 @@ const createSearchResultsTable = () => {
     'rounded',
     'border',
     'border-secondary',
+    'w-100',
   ];
   searchResultsTable.id = 'searchResultsTable';
   searchResultsTable.classList.add(...classArray);
+  searchResultsTable.appendChild(createTableHead());
   searchResultsTable.appendChild(tableBody);
   return searchResultsTable;
+};
+
+const createTableHead = () => {
+  const tableHeadStrings = [
+    'Add to Collection',
+    'Search Score',
+    'Package Name',
+    '',
+  ];
+  const tableHead = document.createElement('thead');
+  const tableRow = document.createElement('tr');
+  tableHeadStrings.forEach((string) => {
+    const tableCell = document.createElement('th');
+    tableCell.textContent = string;
+    tableRow.appendChild(tableCell);
+  });
+  tableHead.appendChild(tableRow);
+  return tableHead;
 };
 
 // Build the row
 const createResultRow = (result) => {
   const resultRow = document.createElement('tr');
   resultRow.classList.add('resultName');
-  resultRow.appendChild(createResultButtonCell(result));
-  resultRow.appendChild(createPackageCell(result, result.score));
-  resultRow.appendChild(createPackageCell(result));
-  resultRow.appendChild(createPackageCell(result, '->'));
+  const linkData = {
+    button: {
+      result: result,
+      linkText: '',
+      classList: [],
+    },
+    score: {
+      result: result,
+      linkText: result.score,
+      classList: [],
+    },
+    packageName: {
+      result: result,
+      linkText: result.name,
+      classList: ['text-wrap', 'text-info'],
+    },
+    outArrow: {
+      result: result,
+      linkText: '->',
+      classList: ['text-nowrap', 'text-info', 'p-1'],
+    },
+  };
+  if (result.score >= 90) {
+    linkData.score.classList = ['text-success'];
+  } else if (result.score >= 25 && result.score < 90) {
+    linkData.score.classList = ['text-warning'];
+  } else {
+    linkData.score.classList = ['text-danger'];
+  }
+  resultRow.appendChild(createResultButtonCell(linkData.button.result));
+  resultRow.appendChild(createPackageCell(linkData.score));
+  resultRow.appendChild(createPackageCell(linkData.packageName));
+  resultRow.appendChild(createPackageCell(linkData.outArrow));
   return resultRow;
 };
 
 // Build Package link cells
-const createPackageCell = (result, linkText = '') => {
+const createPackageCell = (linkData) => {
   const packageCell = document.createElement('td');
   packageCell.classList.add('p-0');
-  packageCell.appendChild(createPackageLink(result, linkText));
+  packageCell.appendChild(createPackageLink(linkData));
   return packageCell;
 };
 
-const createPackageLink = (result, linkText = '') => {
-  if (linkText === '') linkText = result.name;
+const createPackageLink = ({ result, linkText, classList }) => {
   const packageLink = document.createElement('a');
   const classArray = [
     'd-flex',
     'text-decoration-none',
     'h-100',
     'align-items-center',
-    'text-white',
+    'pr-2',
   ];
+  classArray.push(...classList);
   packageLink.href = result.url;
   packageLink.target = '_blank';
   packageLink.classList.add(...classArray);

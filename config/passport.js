@@ -12,7 +12,7 @@ passport.use(
     },
     async function (accessToken, refreshToken, profile, cb) {
       const user = await User.findOne({ googleId: profile.id });
-      console.log(user, '<-user');
+      //console.log(user, '<-user');
       if (user) return cb(null, user);
       try {
         const newUser = await User.create({

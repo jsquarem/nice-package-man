@@ -1,29 +1,24 @@
 const Collection = require('../models/collection');
 const Package = require('../models/package');
 
-module.exports = {
-  new: newCollection,
-  create,
-  index,
-  show,
+const newCollection = (req, res) => {
+  res.render('collections/new.ejs');
 };
 
-function newCollection(req, res) {
-  res.render('collections/new.ejs');
-}
-
-async function index(req, res) {
+const index = async (req, res) => {
   try {
     const collectionDocuments = await Collection.find({ userId: req.user._id })
       .populate('packages')
       .exec();
-    res.render('collections/index', { collections: collectionDocuments });
+    return res.render('collections/index', {
+      collections: collectionDocuments,
+    });
   } catch (err) {
-    res.redirect('/collections');
+    return res.redirect('/collections');
   }
-}
+};
 
-async function create(req, res) {
+const create = async (req, res) => {
   req.body.userId = req.user._id;
   try {
     const collectionDocument = await Collection.create(req.body);
@@ -31,9 +26,9 @@ async function create(req, res) {
   } catch (err) {
     return res.render('collections/new.ejs');
   }
-}
+};
 
-async function show(req, res) {
+const show = async (req, res) => {
   try {
     const collectionDocument = await Collection.findById(req.params.id)
       .populate('packages')
@@ -42,6 +37,15 @@ async function show(req, res) {
       collection: collectionDocument,
     });
   } catch (err) {
-    res.send(err);
+    return res.send(err);
   }
-}
+};
+
+const findCollectionDocument = async () => {};
+
+module.exports = {
+  new: newCollection,
+  create,
+  index,
+  show,
+};

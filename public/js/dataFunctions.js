@@ -32,17 +32,12 @@ const requestData = async (searchString) => {
 const processNPMResults = (results) => {
   const resultArray = [];
   results.forEach((result) => {
-    const name = result.package.name;
-    const version = result.package.version;
-    const date = result.package.date;
-    const score = result.searchScore;
-    const url = result.package.links.npm;
     const item = {
-      name: name,
-      version: version,
-      date: date,
-      score: score,
-      url: url,
+      name: result.package.name,
+      version: result.package.version,
+      date: result.package.date,
+      score: result.searchScore,
+      url: result.package.links.npm,
     };
     resultArray.push(item);
   });
