@@ -20,34 +20,22 @@ const collectionSchema = new mongoose.Schema(
 );
 
 const findCollectionDocumentById = async (id) => {
-  try {
-    const collectionDocument = await Collection.findById(id)
-      .populate('packages')
-      .exec();
+  const collectionDocument = await Collection.findById(id)
+    .populate('packages')
+    .exec();
     return collectionDocument;
-  } catch (err) {
-    return res.send(err);
-  }
 };
 
 const findCollectionDocumentsByUserId = async (userId) => {
-  try {
-    const collectionDocuments = await Collection.find({ userId })
-      .populate('packages')
-      .exec();
-    return collectionDocuments;
-  } catch (err) {
-    return res.send(err);
-  }
+  const collectionDocuments = await Collection.find({ userId })
+    .populate('packages')
+    .exec();
+  return collectionDocuments;
 };
 
 const createCollectionDocument = async (newCollection) => {
-  try {
-    const collectionDocument = await Collection.create(newCollection);
-    return collectionDocument;
-  } catch (err) {
-    return res.send(err);
-  }
+  const collectionDocument = await Collection.create(newCollection);
+  return collectionDocument;
 };
 
 module.exports = {
