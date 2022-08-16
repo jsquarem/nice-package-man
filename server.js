@@ -8,11 +8,39 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const methodOverride = require('method-override');
+const bodyParser = require('body-parser');
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+//const cors = require('cors');
+//const helmet = require('helmet');
+// Routes
 const indexRouter = require('./routes/index');
 const collectionsRouter = require('./routes/collections');
 const packagesRouter = require('./routes/packages');
 const repositoriesRouter = require('./routes/repositories');
 const snippetsRouter = require('./routes/snippets');
+const apiRouter = require('./routes/api');
+const profilesRouter = require('./routes/profiles');
+
+const Profile = require('./models/profile');
+
+const options = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'NP,M API',
+      version: '1.0.0',
+      description: 'A simple Express CRUD API',
+    },
+    servers: [
+      {
+        url: 'http://localhost:3000',
+      },
+    ],
+  },
+  apis: ['./routes/api.js'],
+};
+const specs = swaggerJsDoc(options);
 
 // create the Express app
 const app = express();
@@ -41,12 +69,22 @@ app.use(
   })
 );
 
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs));
+
 app.use(passport.initialize());
 app.use(passport.session());
+const getProfile = async (id) => {
+  const profiles = await Profile.find({ profileId: id }).exec();
+  return profiles[0];
+};
 
 // Add this middleware BELOW passport middleware
-app.use(function (req, res, next) {
-  res.locals.user = req.user; // assinging a property to res.locals, makes that said property (user) availiable in every
+app.use(async function (req, res, next) {
+  res.locals.user = req.user;
+  if (typeof req.user != 'undefined') {
+    res.locals.user = await getProfile(req.user._id);
+  }
+  //res.locals.user = req.user; // assinging a property to res.locals, makes that said property (user) availiable in every
   // single ejs view
   next();
 });
@@ -57,6 +95,12 @@ app.use('/collections', collectionsRouter);
 app.use('/', packagesRouter);
 app.use('/', repositoriesRouter);
 app.use('/', snippetsRouter);
+app.use('/api', apiRouter);
+app.use('/profiles', profilesRouter);
+
+//app.use(helmet());
+app.use(bodyParser.json());
+//app.use(cors());
 
 // invalid request, send 404 page
 app.use(function (req, res) {
