@@ -1,5 +1,11 @@
 <%- include('../partials/header') %>
 <div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a class="text-decoration-none text-info" href="/">Home</a></li>
+      <li class="breadcrumb-item text-white active" aria-current="page">Public Collection</li>
+    </ol>
+  </nav>
   <% if(typeof collection !== 'undefined') { %>
   <h2 class="text-center">Collection:</h2>
   <h3 class="text-center"><%= collection.name %> </h3>

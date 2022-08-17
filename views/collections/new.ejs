@@ -1,5 +1,12 @@
 <%- include('../partials/header') %>
 <div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a class="text-decoration-none text-info" href="/">Home</a></li>
+      <li class="breadcrumb-item"><a class="text-decoration-none text-info" href="/collections">Collections</a></li>
+      <li class="breadcrumb-item text-white active" aria-current="page">New Collection</li>
+    </ol>
+  </nav>
   <h2 class="text-center">Create New Collection</h2>
   <div class="col-md-6 offset-3">
     <form id="new-collection-form" action="/collections" method="POST">

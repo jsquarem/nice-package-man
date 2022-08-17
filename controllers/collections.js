@@ -2,8 +2,7 @@ const {
   findOneCollectionDocumentById,
   createCollectionDocument,
   findManyCollectionDocuments,
-} = require("../models/collection");
-const Package = require("../models/package");
+} = require("../config/dataServices");
 
 const newCollection = (req, res) => {
   res.render("collections/new.ejs");

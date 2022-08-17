@@ -1,5 +1,11 @@
 <%- include('../partials/header') %>
                       <div class="container">
+                        <nav aria-label="breadcrumb">
+                          <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="text-decoration-none text-info" href="/">Home</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Collections</li>
+                          </ol>
+                        </nav>
                         <h2 class="text-center">My Collections</h2>
   <% if(!collections.length) { %>
                           <div class="row">

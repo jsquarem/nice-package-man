@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const snippetSchema = new mongoose.Schema(
   {
@@ -25,7 +25,7 @@ const packageSchema = new mongoose.Schema(
     version: {
       type: String,
       required: true,
-      default: '0.0.0',
+      default: "0.0.0",
     },
     date: {
       type: Date,
@@ -39,7 +39,12 @@ const packageSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    public: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     repositories: [],
     snippets: [snippetSchema],
   },
@@ -48,4 +53,4 @@ const packageSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Package', packageSchema);
+module.exports = mongoose.model("Package", packageSchema);

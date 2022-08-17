@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Package = require("../models/package");
 
 const collectionSchema = new mongoose.Schema(
   {
@@ -25,32 +24,4 @@ const collectionSchema = new mongoose.Schema(
   }
 );
 
-const Collection = mongoose.model("Collection", collectionSchema);
-
-// database logic
-const findOneCollectionDocumentById = (id) => {
-  const collectionDocument = Collection.findById(id)
-    .populate("packages")
-    .exec();
-  return collectionDocument;
-};
-
-const findManyCollectionDocuments = (searchObj) => {
-  const collectionDocuments = Collection.find(searchObj)
-    .populate("packages")
-    .exec();
-  return collectionDocuments;
-};
-
-const createCollectionDocument = (newCollection) => {
-  const collectionDocument = Collection.create(newCollection);
-  return collectionDocument;
-};
-
-module.exports = {
-  findOneCollectionDocumentById,
-  findManyCollectionDocuments,
-  createCollectionDocument,
-};
-
-//module.exports = mongoose.model('Collection', collectionSchema);
+module.exports = mongoose.model("Collection", collectionSchema);

@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-center align-items-center h-100">
       <div class="text-white">
         <h1 class="mb-3">Nice Package, Man</h1>
-        <h4 class="mb-3">A tool for tools</h4>
+        <h3 class="mb-3">A tool for tools</h3>
         <% let actionURL; 
         if(user) { 
           actionURL = '/collections'; 
@@ -13,7 +13,7 @@
         } 
         %>
         <a class="btn btn-outline-light btn-lg" href="<%= actionURL %>" role="button">Get Started</a>
-        <p class="mt-3 fs-4"><a href="#info" class="text-white">Dude...what?<br><i class="bi bi-chevron-down"></i></a></p>
+        <p class="mt-3 fs-5"><a href="#info" class="text-white">Dude...what?<br><i class="bi bi-chevron-down"></i></a></p>
       </div>
     </div>
 </div>
@@ -23,20 +23,21 @@
     <div class="row">
       <div class="col-12 my-5">
         <h2 class="text-center">Organize and share tips, code snippets, and repositories for your favorite NPM packages</h2>
+      <h5 class="text-center">Improve productivity and time to deploy by over 9000%.  <a class="text-info" target="_blank" href="https://en.wikipedia.org/wiki/Science">It's science</a><sup>[1]</sup>.</h5>
       </div>
     </div>
     <div class="row mb-5">
       <div class="col-6">
         <h4>Find and archive your favorite packages</h4>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam porro sit itaque nesciunt natus pariatur tempora eum! Corrupti expedita harum placeat omnis, explicabo quia molestias ducimus, accusamus tempora dolorem modi.</p>
+        <p>Search the NPMJS.com api for packages to populate your collection. Once a package is associate with your collection, you can begin adding code snippets or links that will stay with that package, regardless of which collections you add it to.</p>
         <div class="col-12 marketing-image-div">
           <img class="marketing-image top-left-image" src="/images/search.png" alt="Search Results Image">
         </div>
       </div>
-      <div class="col-6">
-        <h4>Add Code snippers and code repos to your packages</h4>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo dolorem ex in! Error omnis quaerat sequi est neque doloremque, quisquam amet natus laboriosam ipsa nesciunt adipisci, beatae odit nostrum. Eum?</p>
-        <div class="col-12 marketing-image-div">
+      <div class="col-6 h-100">
+        <h4>Add code snippets and code repos to your packages</h4>
+        <p>Add code snippets and code repositories to your packages, so you can easily install, initialize, and deploy some of the trickier packages. Share these notes and links by making the package public.</p>
+        <div class="col-12 marketing-image-div align-self-end">
           <img class="marketing-image top-right-image" src="/images/package.png" alt="Search Results Image">
         </div>
       </div>
@@ -44,20 +45,21 @@
     <div class="row mb-3">
       <div class="col-6">
         <h4>Quickly scan for critical updates</h4>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus optio quis, voluptatibus accusamus voluptatum laboriosam, modi tempora nobis recusandae nam iste quam, ratione eius explicabo. Quod inventore deserunt adipisci quibusdam!</p>
+        <p>Each package and code snippet is logged to the version of the package you initially added.  Use this information to quickly identify if the code you've been using is outdated, or if there's a critical version update.</p>
         <div class="col-12 marketing-image-div">
           <img class="marketing-image bottom-left-image" src="/images/collections.png" alt="Search Results Image">
         </div>
       </div>
       <div class="col-6">
         <h4>Share collections of packages with team members.</h4>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore atque rem ratione iusto, architecto fugiat consequuntur illo laboriosam, tempore distinctio laborum, nobis corrupti perspiciatis tempora? Recusandae ipsa ex laboriosam voluptate.</p>
+        <p>Individually mark collections as public or private so you can decide who gets to see your nasty code.  Revoke public access if it's too embarassing.  We get it. You can also access collection and package data via our API for your nerdier friends.</p>
         <div class="col-12 marketing-image-div">
           <img class="marketing-image bottom-right-image" src="/images/collection.png" alt="Search Results Image">
         </div>
       </div>
     </div>
    </div>
+   <p class="text-center">[1] - Feel free to read that entire article and write us a strongy worded letter if you disagree.  You won't.</p>
 </div>
 <!-- Hero -->
 <%- include('partials/footer') %>
