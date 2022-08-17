@@ -1,11 +1,15 @@
-const Collection = require('../models/collection');
-const Package = require('../models/package');
+const {
+  findOneCollectionDocumentById,
+  createCollectionDocument,
+  findManyCollectionDocuments,
+} = require("../models/collection");
+const Package = require("../models/package");
 
 const index = async (req, res) => {
   req.body.userId = req.user._id;
   try {
     const packageDocuments = await Package.find({ userId: req.user._id });
-    return res.render('packages/index', {
+    return res.render("packages/index", {
       packages: packageDocuments,
     });
   } catch (err) {
@@ -26,7 +30,12 @@ const create = async (req, res) => {
       ? existingPackage[0]
       : await Package.create(req.body);
 
-    const collectionDocument = await Collection.findById(collectionId);
+    console.log(packageDocument, "<-packageDocument");
+
+    const collectionDocument = await findOneCollectionDocumentById(
+      collectionId
+    );
+    console.log(collectionDocument, "<-collectionDocument");
 
     // if package exists in collection, return
     if (collectionDocument.packages.includes(packageDocument._id))
@@ -42,11 +51,11 @@ const create = async (req, res) => {
 
 const show = async (req, res) => {
   try {
-    const collectionDocuments = await Collection.find({
+    const collectionDocuments = await findManyCollectionDocuments({
       packages: req.params.id,
     });
     const packageDocument = await Package.findById(req.params.id);
-    return res.render('packages/show', {
+    return res.render("packages/show", {
       package: packageDocument,
       collections: collectionDocuments,
     });
@@ -61,7 +70,7 @@ const removeFromCollection = async (req, res) => {
   req.body.userId = req.user._id;
   try {
     const collectionDocument = await Collection.findById(collectionId);
-    console.log(collectionDocument.packages, '<- collectionDocument.packages');
+    console.log(collectionDocument.packages, "<- collectionDocument.packages");
     const packageIndex = collectionDocument.packages.indexOf(packageId);
     collectionDocument.packages.splice(packageIndex, 1);
     await collectionDocument.save();

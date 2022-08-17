@@ -1,0 +1,56 @@
+<%- include('../partials/header') %>
+<div class="container">
+  <% if(typeof collection !== 'undefined') { %>
+  <h2 class="text-center">Collection:</h2>
+  <h3 class="text-center"><%= collection.name %> </h3>
+  <div class="row">
+      <% if(collection.packages.length > 0) { %>
+    <div class="col-8 offset-2 card bg-dark">
+      <table class="table table-dark table-hover align-self-center mb-3 p-0">
+        <thead>
+          <tr>
+            <th>
+              Package Name
+            </th>
+            <th>
+              Version
+            </th>
+            <th>
+              Last Updated
+            </th>
+            <th>
+              View on NPM
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% collection.packages.forEach((package) => { %>
+          <tr>
+            <td class="table-package-name">
+              <%= package.name %>
+            </td>
+            <td>
+              <%= package.version %> 
+            </td>
+            <td>
+              <%= package.date.toLocaleDateString(); %> 
+            </td>
+            <td>
+              <a href="<%= package.url %>" class="text-decoration-none text-info">View on NPM&nbsp;&nbsp;<i class="bi bi-arrow-right"></i></a>
+            </td>
+          </tr>
+          <% }) %>        
+        </tbody>
+      </table>
+      <h6 class="text-center"><%= collection.description %></h6>
+    </div>
+      <% } %>
+  </div>
+  <% } else { %>
+    <h2 class="text-center mt-5 pt-5">This collection is private</h2>
+    <h4 class="text-center">Please contact the collection owner for access.</h4>
+
+    <% } %>
+</div>
+
+<%- include('../partials/footer') %>

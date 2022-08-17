@@ -1,7 +1,7 @@
 const {
-  findCollectionDocumentsByUserId,
+  findOneCollectionDocumentById,
   createCollectionDocument,
-  findCollectionDocumentById,
+  findManyCollectionDocuments,
 } = require("../models/collection");
 const Package = require("../models/package");
 
@@ -10,11 +10,10 @@ const newCollection = (req, res) => {
 };
 
 const index = async (req, res) => {
-  console.log("in the index function");
   try {
-    // console.log(req.user._id, '<-req.user._id');
-    const collections = await findCollectionDocumentsByUserId(req.user._id);
-    // console.log(collections, '<-collections');
+    const collections = await findManyCollectionDocuments({
+      userId: req.user._id,
+    });
     return res.render("collections/index", { collections });
   } catch (err) {
     return res.redirect("/collections");
@@ -33,8 +32,31 @@ const create = async (req, res) => {
 
 const show = async (req, res) => {
   try {
-    const collection = await findCollectionDocumentById(req.params.id);
+    const collection = await findOneCollectionDocumentById(req.params.id);
+    // return search: true to include search static files
     return res.render("collections/show", { collection, search: true });
+  } catch (err) {
+    return res.redirect("/collections");
+  }
+};
+
+const showPublic = async (req, res) => {
+  try {
+    const collection = await findOneCollectionDocumentById(req.params.id);
+    if (!collection.public) return res.render("collections/public");
+    return res.render("collections/public", { collection });
+  } catch (err) {
+    return res.redirect("/collections");
+  }
+};
+
+const updatePublic = async (req, res) => {
+  try {
+    const collection = await findOneCollectionDocumentById(req.params.id);
+    collection.public = req.body.makeCollectionPublic === "true" ? true : false;
+    console.log(collection, "<-collection");
+    collection.save();
+    return res.redirect("/collections");
   } catch (err) {
     return res.redirect("/collections");
   }
@@ -45,4 +67,6 @@ module.exports = {
   create,
   index,
   show,
+  showPublic,
+  updatePublic,
 };

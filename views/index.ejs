@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-center align-items-center h-100">
       <div class="text-white">
         <h1 class="mb-3">Nice Package, Man</h1>
-        <h4 class="mb-3">A tool to simplify your tools</h4>
+        <h4 class="mb-3">A tool for tools</h4>
         <% let actionURL; 
         if(user) { 
           actionURL = '/collections'; 
@@ -13,8 +13,51 @@
         } 
         %>
         <a class="btn btn-outline-light btn-lg" href="<%= actionURL %>" role="button">Get Started</a>
+        <p class="mt-3 fs-4"><a href="#info" class="text-white">Dude...what?<br><i class="bi bi-chevron-down"></i></a></p>
       </div>
     </div>
+</div>
+<div class="container">
+  <div id="info"></div>
+  <div class="col-12">
+    <div class="row">
+      <div class="col-12 my-5">
+        <h2 class="text-center">Organize and share tips, code snippets, and repositories for your favorite NPM packages</h2>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-6">
+        <h4>Find and archive your favorite packages</h4>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam porro sit itaque nesciunt natus pariatur tempora eum! Corrupti expedita harum placeat omnis, explicabo quia molestias ducimus, accusamus tempora dolorem modi.</p>
+        <div class="col-12 marketing-image-div">
+          <img class="marketing-image top-left-image" src="/images/search.png" alt="Search Results Image">
+        </div>
+      </div>
+      <div class="col-6">
+        <h4>Add Code snippers and code repos to your packages</h4>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo dolorem ex in! Error omnis quaerat sequi est neque doloremque, quisquam amet natus laboriosam ipsa nesciunt adipisci, beatae odit nostrum. Eum?</p>
+        <div class="col-12 marketing-image-div">
+          <img class="marketing-image top-right-image" src="/images/package.png" alt="Search Results Image">
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-6">
+        <h4>Quickly scan for critical updates</h4>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus optio quis, voluptatibus accusamus voluptatum laboriosam, modi tempora nobis recusandae nam iste quam, ratione eius explicabo. Quod inventore deserunt adipisci quibusdam!</p>
+        <div class="col-12 marketing-image-div">
+          <img class="marketing-image bottom-left-image" src="/images/collections.png" alt="Search Results Image">
+        </div>
+      </div>
+      <div class="col-6">
+        <h4>Share collections of packages with team members.</h4>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore atque rem ratione iusto, architecto fugiat consequuntur illo laboriosam, tempore distinctio laborum, nobis corrupti perspiciatis tempora? Recusandae ipsa ex laboriosam voluptate.</p>
+        <div class="col-12 marketing-image-div">
+          <img class="marketing-image bottom-right-image" src="/images/collection.png" alt="Search Results Image">
+        </div>
+      </div>
+    </div>
+   </div>
 </div>
 <!-- Hero -->
 <%- include('partials/footer') %>

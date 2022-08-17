@@ -1,20 +1,39 @@
 body {
   background-color: rgb(83, 83, 83) !important;
   color: #ffffff;
+  padding-top: 75px;
 }
 
 .bg-image {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)),
-    url('/images/npm-hero.png');
+    url("/images/npm-hero.png");
   height: 94vh;
-
+  background-attachment: fixed;
   background-size: cover;
   background-position: center;
 }
 .container {
   background: rgb(83, 83, 83) !important;
   padding: 20px;
-  min-height: 75vh;
+  min-height: 90vh;
+  margin-bottom: -15px;
+}
+
+.marketing-image {
+  max-height: 400px;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.marketing-image-div {
+  border: 2px solid #212529;
+  padding: 10px;
+  text-align: center;
+}
+
+#info {
+  position: relative;
+  top: -90px;
 }
 
 .navbar-collapse {
@@ -29,7 +48,7 @@ body {
 
 .jumbotron {
   color: white;
-  background-image: url('https://images.unsplash.com/photo-1438109491414-7198515b166b?q=80&fm=jpg&s=cbdabf7a79c087a0b060670a6d79726c');
+  background-image: url("https://images.unsplash.com/photo-1438109491414-7198515b166b?q=80&fm=jpg&s=cbdabf7a79c087a0b060670a6d79726c");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -58,6 +77,11 @@ pre {
 
 .package-info-name {
   font-size: 3em;
+  color: rgb(206, 117, 15);
+  font-family: monospace;
+}
+
+.table-package-name {
   color: rgb(206, 117, 15);
   font-family: monospace;
 }

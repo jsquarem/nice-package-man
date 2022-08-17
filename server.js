@@ -73,6 +73,7 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 const getProfile = async (id) => {
   const profiles = await Profile.find({ profileId: id }).exec();
   return profiles[0];

@@ -12,6 +12,11 @@ const collectionSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    public: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
     packages: [{ type: mongoose.Schema.Types.ObjectId, ref: "Package" }],
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
@@ -23,20 +28,17 @@ const collectionSchema = new mongoose.Schema(
 const Collection = mongoose.model("Collection", collectionSchema);
 
 // database logic
-const findCollectionDocumentById = (id) => {
+const findOneCollectionDocumentById = (id) => {
   const collectionDocument = Collection.findById(id)
     .populate("packages")
     .exec();
   return collectionDocument;
 };
 
-const findCollectionDocumentsByUserId = (userId) => {
-  // console.log('findCollectionDocumentsByUserId');
-  // console.log(userId, '<-userId');
-  const collectionDocuments = Collection.find({ userId })
+const findManyCollectionDocuments = (searchObj) => {
+  const collectionDocuments = Collection.find(searchObj)
     .populate("packages")
     .exec();
-  // console.log(collectionDocuments, '<-collectionDocuments');
   return collectionDocuments;
 };
 
@@ -46,7 +48,9 @@ const createCollectionDocument = (newCollection) => {
 };
 
 module.exports = {
-  findCollectionDocumentById,
-  findCollectionDocumentsByUserId,
+  findOneCollectionDocumentById,
+  findManyCollectionDocuments,
   createCollectionDocument,
 };
+
+//module.exports = mongoose.model('Collection', collectionSchema);
