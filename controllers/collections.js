@@ -9,6 +9,9 @@ const newCollection = (req, res) => {
 };
 
 const index = async (req, res) => {
+  res.locals.url = req.originalUrl;
+  res.locals.host = req.get("host");
+  res.locals.protocol = req.protocol;
   try {
     const collections = await findManyCollectionDocuments({
       userId: req.user._id,
@@ -30,6 +33,9 @@ const create = async (req, res) => {
 };
 
 const show = async (req, res) => {
+  res.locals.url = req.originalUrl;
+  res.locals.host = req.get("host");
+  res.locals.protocol = req.protocol;
   try {
     const collection = await findOneCollectionDocumentById(req.params.id);
     // return search: true to include search static files
@@ -53,9 +59,10 @@ const updatePublic = async (req, res) => {
   try {
     const collection = await findOneCollectionDocumentById(req.params.id);
     collection.public = req.body.makeCollectionPublic === "true" ? true : false;
-    console.log(collection, "<-collection");
     collection.save();
-    return res.redirect("/collections");
+    if (req.body.collectionIndex === "true")
+      return res.redirect("/collections");
+    return res.redirect(`/collections/${req.params.id}`);
   } catch (err) {
     return res.redirect("/collections");
   }

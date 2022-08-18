@@ -10,6 +10,23 @@
   <h2 class="text-center">Collection:</h2>
   <h3 class="text-center"><%= collection.name %></h3>
   <div class="row">
+    <div class="col-6 offset-3">
+      <% if(collection.public) { %>
+        Shareable Link
+        <div class="input-group mb-3">
+          <input disabled type="text" class="form-control bg-secondary text-white border-dark border-end-0" value="<%= protocol %>://<%= host %>/collections/<%= collection._id %>/public" aria-label="Add code repository"><span class="input-group-text bg-secondary border-dark"><a class="text-dark" target="_blank" href="<%= protocol %>://<%= host %>/collections/<%= collection._id %>/public"><i class="bi bi-arrow-up-right-square"></i></a></span>
+        </div>
+      <% } %>
+        <div class="form-check form-switch float-end">
+          <form action="/collections/<%= collection._id %>/public" method="POST">
+            <input class="form-check-input" type="checkbox" <% if(collection.public) { %> checked <% } %> onclick="clickFn(event)">
+            <input type="hidden" name="makeCollectionPublic" value="<% if(collection.public) { %>false<% } else { %>true<% } %>">
+            <label class="form-check-label" for="makeCollectionPublic"><% if(collection.public) { %>Make Private<% } else { %>Make Public<% } %></label>
+          </form>
+        </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-6 offset-3 p-0">
       <label for="description">Description</label>
       <div id="collectionDescriptionCard" class="card bg-dark p-2 mb-3">
@@ -91,5 +108,12 @@
       <% } %>
   </div>
 </div>
+<script>
+  function clickFn(event) {
+    const checkbox = event.currentTarget;
+    //checkbox.value = checkbox.checked ? 'false' : 'true';
+    event.currentTarget.closest("form").submit(); 
+  }
+</script>
 
 <%- include('../partials/footer') %>

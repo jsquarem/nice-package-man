@@ -95,7 +95,6 @@ const showPublic = async (req, res) => {
 };
 
 const updatePublic = async (req, res) => {
-  console.log(req.body, "<-req in update");
   try {
     const package = await findOnePackageDocumentById(req.params.id);
     package.public = req.body.makePackagePublic === "true" ? true : false;
