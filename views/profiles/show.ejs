@@ -10,8 +10,8 @@
   <h3 class="text-center"><%= profile.name %> </h3>
   <div class="row">
     <div class="col-8 offset-2">
-      <% if(profile.authentication.key) { %>
       <form class="form" action="/profiles" method="POST">
+      <% if(profile.authentication.key) { %>
           <div class="input-group mb-3">
             <input type="text" class="form-control bg-secondary text-white border-dark" value="<%= profile.authentication.key.authenticationKey.key %>" disabled>
           <% } else { %>
@@ -22,6 +22,16 @@
           </div>
       </form>
     </div>
+    <% if(profile.authentication.key) { %>
+      <div class="col-8 offset-2">
+        Example API Endpoint
+        <ul class="list-group">
+          <li class="list-group-item">
+            <%= protocol %>://<%= host %>/api/<%= profile.email %>:<%= profile.authentication.key.authenticationKey.key %>/collections
+          </li>
+        </ul>
+    <% } %>
+      </div>
   </div>
 </div>
 

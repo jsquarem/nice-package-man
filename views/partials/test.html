@@ -1,60 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      body {
-        background: #eee;
-      }
-      pre {
-        margin: 0;
-      }
-      .snippet-parent {
-        background: #ffffff;
-        max-width: 960px;
-        margin: 0 auto;
-        padding: 20px;
-        position: relative;
-      }
-
-      .snippet-parent:after {
-        content: '';
-        display: block;
-        clear: both;
-      }
-
-      .snippet {
-        height: 100px;
-        /* width: 100px; */
-      }
-
-      .snippet-text {
-        background-color: green;
-        /* display: inline; */
-      }
-      .snippet-version {
-        background-color: red;
-        float: right;
-        /* padding: -40px; */
-      }
-    </style>
-  </head>
-  <body>
-    <div class="snippet-parent">
-      <div class="snippet-version snippet">7.0.3</div>
-      <div class="snippet-text snippet">
-        <pre>
-        <code class="language-js">
-          module.exports = {
-            create,
-            delete: deleteSnippet,
-          };
-        </code>
-      </pre>
-      </div>
-    </div>
-  </body>
-</html>
+// load the env consts require("dotenv").config(); const express =
+require("express"); const path = require("path"); const logger =
+require("morgan"); const cookieParser = require("cookie-parser"); // session
+middleware const session = require("express-session"); const passport =
+require("passport"); const methodOverride = require("method-override"); //
+Routes // create the Express app const app = express(); // connect to the
+MongoDB with mongoose require("./config/database"); // configure Passport
+require("./config/passport"); // view engine setup app.set("views",
+path.join(__dirname, "views")); app.set("view engine", "ejs");
+app.use(methodOverride("_method")); app.use(express.static(path.join(__dirname,
+"public"))); app.use(logger("dev")); app.use(express.json());
+app.use(express.urlencoded({ extended: true })); app.use(cookieParser()); //
+mount the session middleware app.use( session({ secret: process.env.SECRET,
+resave: false, saveUninitialized: true, }) ); app.use(passport.initialize());
+app.use(passport.session()); // Add this middleware BELOW passport middleware
+app.use(async function (req, res, next) { res.locals.user = req.user;
+//res.locals.user = req.user; // assinging a property to res.locals, makes that
+said property (user) availiable in every // single ejs view next(); }); // mount
+all routes with appropriate base paths app.use("/", indexRouter);
+app.use("/collections", collectionsRouter); app.use("/", packagesRouter);
+app.use(bodyParser.json()); // invalid request, send 404 page app.use(function
+(req, res) { res.status(404).send("Cant find that!"); }); module.exports = app;

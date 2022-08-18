@@ -1,31 +1,34 @@
-const Profile = require('../models/profile');
-const Collection = require('../models/collection');
-const { checkHashKey } = require('../config/authHelper');
+const Profile = require("../models/profile");
+const Collection = require("../models/collection");
+const { checkHashKey } = require("../config/authHelper");
 
 const authenticateApi = async (req, res) => {
-  console.log(req.params, '<-req.params');
-  const key = req.params.id;
+  console.log(req.params, "<-req.params");
+  const [email, key] = req.params.id.split(":");
+  console.log(email, "<-email");
   try {
     const profileDocuments = await Profile.find({
-      googleId: req.user.googleId,
+      email: email,
     });
-    const profileDocument = profileDocuments[0];
+    const [profileDocument] = profileDocuments;
     const salt = profileDocument.authentication.key.authenticationKey.salt;
-    const id = profileDocument._id.toString();
+    //const email = profileDocument.email.toString();
 
-    if (checkHashKey(id, salt, key)) return profileDocument;
-    return res.json({ Error: 'Incorrect authorization key' });
+    if (checkHashKey(email, salt, key)) return profileDocument;
+    return res.json({ Error: "Incorrect authorization key" });
   } catch (err) {
     return res.send(err);
   }
 };
 
 const getCollections = async (req, res) => {
+  console.log("in the api controller");
   try {
     const profile = authenticateApi(req, res);
     const collectionDocuments = await Collection.find({
       userId: req.user._id,
     });
+    console.log("am authenticated");
     return res.json({ collectionDocuments });
   } catch (err) {
     return res.send(err);
