@@ -1,4 +1,4 @@
-const Package = require('../models/package');
+const Package = require("../models/package");
 
 module.exports = {
   create,
@@ -7,12 +7,9 @@ module.exports = {
 
 async function create(req, res) {
   const packageId = req.params.id;
-  console.log(packageId, '<-packageId');
   try {
     const snippetDocument = await Package.findById(packageId);
-    console.log(req.body.snippet, '<-req.body.snippet');
     snippetDocument.snippets.push(req.body);
-    console.log(snippetDocument, '<-snippetDocument');
     await snippetDocument.save();
     return res.redirect(`/packages/${packageId}`);
   } catch (err) {

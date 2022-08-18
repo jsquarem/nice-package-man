@@ -3,8 +3,7 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a class="text-decoration-none text-info" href="/">Home</a></li>
-      <li class="breadcrumb-item"><a class="text-decoration-none text-info" href="/packages">Packages</a></li>
-      <li class="breadcrumb-item text-white active" aria-current="page"><%= package.name %></li>
+      <li class="breadcrumb-item text-white active" aria-current="page">Public Package</li>
     </ol>
   </nav>
   <div class="row">
@@ -24,15 +23,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-2">
-    <h4>In Collections:</h4>
-      <div class="list-group">
-        <% collections.forEach(collection => { %> 
-        <a href="/collections/<%= collection._id %>" class="list-group-item list-group-item-dark list-group-item-action"><%= collection.name %> </a>
-        <% }) %>
-      </div>
-    </div>
-    <div class="col-9 offset-1">
+    <div class="col-10 offset-1">
       <div class="row">
         <div class="col-12">
           <label for="description">Description</label>
@@ -43,75 +34,50 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <a class="btn btn-secondary mb-2 border-dark" id="repositoryCollapseBtn" data-bs-toggle="collapse" href="#repositoryCollapse" role="button" aria-expanded="false" aria-controls="repositoryCollapse">
-              Hide Repositories
-          </a>
-          <div class="collapse show" id="repositoryCollapse">
-            <div>
-              <form id="addRepositoryForm" action="/packages/<%= package._id %>/repositories" method="POST">
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control bg-secondary text-white border-dark" placeholder="Add code repository" aria-label="Add code repository" name="url">
-                  <button class="btn btn-secondary border-dark" type="submit">Add Repo</button>
-                </div>
-              </form>
-              <% if(package.repositories.length) { %>
-                <div class="card bg-dark mb-3">
-                  <table class="table table-dark table-hover align-self-center mb-0">
-                    <% for(let i = 0; i < package.repositories.length; i++) { %>
-                    <tr>
-                      <td>
-                        <a href="<%= package.repositories[i] %>" class="text-info text-decoration-none" target="_blank"><%= package.repositories[i] %></a>
-                      </td>
-                      <td class="text-end px-3">
-                        <a href="/packages/<%= package._id %>/repositories/<%= i %>" class="text-danger text-decoration-none">delete</a>
-                      </td>
-                    </tr>
-                    <% } %>
-                  </table>
-                </div>
+        <% if(package.repositories.length) { %>
+          <h6>Repositories</h6>
+          <div class="card bg-dark mb-3">
+            <table class="table table-dark table-hover align-self-center mb-0">
+              <% for(let i = 0; i < package.repositories.length; i++) { %>
+              <tr>
+                <td>
+                  <a href="<%= package.repositories[i] %>" class="text-info text-decoration-none" target="_blank"><%= package.repositories[i] %></a>
+                </td>
+                <td class="text-end px-3">
+                  <a href="/packages/<%= package._id %>/repositories/<%= i %>" class="text-danger text-decoration-none">delete</a>
+                </td>
+              </tr>
               <% } %>
-            </div>
+            </table>
           </div>
+        <% } %>
         </div>
       </div>
 
       <div class="row">
         <div class="col-12">
-          <a class="btn btn-secondary mb-2 border-dark" id="snippetCollapseBtn" data-bs-toggle="collapse" href="#snippetCollapse" role="button" aria-expanded="false" aria-controls="snippetCollapse">
-              Hide Code Snippets
-          </a>
-          <div class="collapse show" id="snippetCollapse">
-            <div class="">
-              <form id="addRepositoryForm" action="/packages/<%= package._id %>/snippets" method="POST">
-                <div class="input-group mb-3">
-                  <textarea type="text" class="form-control bg-secondary text-white border-dark" placeholder="Add code snippet" aria-label="Add code snippet"  rows="4" name="snippet"></textarea>
-                  <input class="form-control" type="text" name="currentPackageVersion" value="<%= package.version %>" hidden />
-                  <button class="btn btn-secondary text-center border-dark" type="submit">Add<br>&nbsp;&nbsp;Snippet&nbsp;&nbsp;</button>
-                </div>
-              </form>
-              <% if(package.snippets.length) { %>
-                <div class="bg-dark card p-0">
-                <table class="table table-dark table-hover align-self-center w-100 m-0">
-                  <% for(let i = 0; i < package.snippets.length; i++) { %>
-                  <tr>
-                    <td class="p-0">
-                      <div class="p-0">
-                        <div class="snippet-version snippet m-2">v<%= package.snippets[i].currentPackageVersion %></div>
-                        <pre class="w-100 snippet"><code class="language-js"><%= package.snippets[i].snippet %></code></pre>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="text-end px-3">
-                        <a href="/packages/<%= package._id %>/snippets/<%= i %>" class="text-danger text-decoration-none">delete</a>
-                      </div>
-                    </td>
-                  </tr>
-                  <% } %>
-                </table>
-                </div>
+          <% if(package.snippets.length) { %>
+            <h6>Code Snippets</h6>
+            <div class="bg-dark card p-0">
+            <table class="table table-dark table-hover align-self-center w-100 m-0">
+              <% for(let i = 0; i < package.snippets.length; i++) { %>
+              <tr>
+                <td class="p-0">
+                  <div class="p-0">
+                    <div class="snippet-version snippet m-2">v<%= package.snippets[i].currentPackageVersion %></div>
+                    <pre class="w-100 snippet"><code class="language-js"><%= package.snippets[i].snippet %></code></pre>
+                  </div>
+                </td>
+                <td>
+                  <div class="text-end px-3">
+                    <a href="/packages/<%= package._id %>/snippets/<%= i %>" class="text-danger text-decoration-none">delete</a>
+                  </div>
+                </td>
+              </tr>
               <% } %>
+            </table>
             </div>
-          </div>
+          <% } %>
         </div>
       </div>
     </div>

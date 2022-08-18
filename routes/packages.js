@@ -11,7 +11,7 @@ router.get(
   isLoggedIn,
   packageController.removeFromCollection
 );
-
-router.get("/packages/:id/public", isLoggedIn, packageController.showPublic);
+router.get("/packages/:id/public", packageController.showPublic);
+router.post("/packages/:id/public", isLoggedIn, packageController.updatePublic);
 //router.post("/packages/:id/public", isLoggedIn, packageController.updatePublic);
 module.exports = router;

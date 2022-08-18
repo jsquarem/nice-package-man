@@ -35,6 +35,24 @@
     <div class="col-9 offset-1">
       <div class="row">
         <div class="col-12">
+          <% if(package.public) { %>
+            Shareable Link
+            <div class="input-group mb-3">
+            <input disabled type="text" class="form-control bg-secondary text-white border-dark border-end-0" value="http://localhost:3000/packages/<%= package._id %>/public" aria-label="Add code repository">
+            </a><span class="input-group-text bg-secondary border-dark"><a class="text-dark" target="_blank" href="http://localhost:3000/packages/<%= package._id %>/public"><i class="bi bi-arrow-up-right-square"></i></a></span>
+            </div>
+            <% } %>
+          <div class="form-check form-switch">
+            <form action="/packages/<%= package._id %>/public" method="POST">
+              <input class="form-check-input" type="checkbox" <% if(package.public) { %> checked <% } %> onclick="clickFn(event)">
+              <input type="hidden" name="makePackagePublic" value="<% if(package.public) { %>false<% } else { %>true<% } %>">
+              <label class="form-check-label" for="makePackagePublic"><% if(package.public) { %>Make Private<% } else { %>Make Public<% } %></label>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
           <label for="description">Description</label>
           <div id="packageDescriptionCard" class="card bg-dark p-2 mb-3">
             <%= package.description %>
@@ -117,4 +135,11 @@
     </div>
   </div>
 </div>
+<script>
+  function clickFn(event) {
+    const checkbox = event.currentTarget;
+    //checkbox.value = checkbox.checked ? 'false' : 'true';
+    event.currentTarget.closest("form").submit(); 
+  }
+</script>
 <%- include('../partials/footer') %>

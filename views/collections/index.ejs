@@ -26,7 +26,8 @@
                             </div>
                             <% } %>
                             <div class="col-12 d-flex justify-content-between">
-                              <span class="fs-3 fw-bold"><%= collection.name %></span><div class="form-check form-switch">
+                              <span class="fs-3 fw-bold"><%= collection.name %></span>
+                              <div class="form-check form-switch">
                                 <form action="/collections/<%= collection._id %>/public" method="POST">
                                   <input class="form-check-input" type="checkbox" <% if(collection.public) { %> checked <% } %> onclick="clickFn(event)">
                                   <input type="hidden" name="makeCollectionPublic" value="<% if(collection.public) { %>false<% } else { %>true<% } %>">

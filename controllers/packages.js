@@ -92,9 +92,10 @@ const showPublic = async (req, res) => {
 };
 
 const updatePublic = async (req, res) => {
+  console.log("updatePublic");
   try {
     const package = await findOnePackageDocumentById(req.params.id);
-    package.public = req.body.makepackagePublic === "true" ? true : false;
+    package.public = req.body.makePackagePublic === "true" ? true : false;
     package.save();
     return res.redirect("/packages");
   } catch (err) {
