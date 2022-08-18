@@ -50,6 +50,9 @@ const create = async (req, res) => {
 };
 
 const show = async (req, res) => {
+  res.locals.url = req.originalUrl;
+  res.locals.host = req.get("host");
+  res.locals.protocol = req.protocol;
   try {
     const collectionDocuments = await findManyCollectionDocuments({
       packages: req.params.id,
@@ -92,12 +95,13 @@ const showPublic = async (req, res) => {
 };
 
 const updatePublic = async (req, res) => {
-  console.log("updatePublic");
+  console.log(req.body, "<-req in update");
   try {
     const package = await findOnePackageDocumentById(req.params.id);
     package.public = req.body.makePackagePublic === "true" ? true : false;
     package.save();
-    return res.redirect("/packages");
+    if (req.body.packageIndex === "true") return res.redirect("/packages");
+    return res.redirect(`/packages/${req.params.id}`);
   } catch (err) {
     return res.redirect("/packages");
   }

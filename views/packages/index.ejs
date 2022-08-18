@@ -26,6 +26,9 @@
               View on NPM
             </th>
             <th>
+              Public/Private
+            </th>
+            <th>
               &nbsp;              
             </th>
           </tr>
@@ -45,6 +48,15 @@
             <td>
               <a href="<%= package.url %>" class="text-decoration-none text-info">View on NPM&nbsp;&nbsp;<i class="bi bi-arrow-right"></i></a>
             </td>
+            <td class="d-flex justify-content-center">
+              <div class="form-check form-switch">
+                <form action="/packages/<%= package._id %>/public" method="POST">
+                  <input class="form-check-input" type="checkbox" <% if(package.public) { %> checked <% } %> onclick="clickFn(event)">
+                  <input type="hidden" name="makePackagePublic" value="<% if(package.public) { %>false<% } else { %>true<% } %>">
+                  <input type="hidden" name="packageIndex" value="true">
+                </form>
+              </div>
+            </td>
             <td>
               <a href="/packages/<%= package._id %>" class="text-decoration-none text-danger">delete</a>
             </td>
@@ -62,4 +74,12 @@
   <% } %>
   </div>
 </div>
+
+<script>
+  function clickFn(event) {
+    const checkbox = event.currentTarget;
+    //checkbox.value = checkbox.checked ? 'false' : 'true';
+    event.currentTarget.closest("form").submit(); 
+  }
+</script>
 <%- include('../partials/footer') %>

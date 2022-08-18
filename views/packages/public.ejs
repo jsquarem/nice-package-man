@@ -6,6 +6,7 @@
       <li class="breadcrumb-item text-white active" aria-current="page">Public Package</li>
     </ol>
   </nav>
+  <% if(typeof package !== 'undefined') { %>
   <div class="row">
     <h2 class="text-center">Package:</h2>
     <div class="col-12">
@@ -82,5 +83,10 @@
       </div>
     </div>
   </div>
+  <% } else { %>
+    <h2 class="text-center mt-5 pt-5">This package is private</h2>
+    <h4 class="text-center">Please contact the package owner for access.</h4>
+
+    <% } %>
 </div>
 <%- include('../partials/footer') %>
