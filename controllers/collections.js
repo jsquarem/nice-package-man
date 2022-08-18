@@ -3,6 +3,7 @@ const {
   createCollectionDocument,
   findManyCollectionDocuments,
 } = require("../config/dataServices");
+const Profile = require("../models/profile");
 
 const newCollection = (req, res) => {
   res.render("collections/new.ejs");
@@ -23,8 +24,10 @@ const index = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  req.body.userId = req.user._id;
   try {
+    const profile = await Profile.findById(req.user.profileId);
+    req.body.userId = req.user._id;
+    req.body.profileId = profile._id;
     const collection = await createCollectionDocument(req.body);
     return res.redirect(`/collections/${collection._id}`);
   } catch (err) {

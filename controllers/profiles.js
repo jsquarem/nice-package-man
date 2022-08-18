@@ -24,7 +24,7 @@ const createAuthKey = async (req, res) => {
     console.log(profileDocuments, "<-profileDocuments");
     const [profileDocument] = profileDocuments;
     profileDocument.authentication.key = await generateHashKey(
-      profileDocument._id.toString()
+      profileDocument.email
     );
     profileDocument.authentication.count++;
     profileDocument.save();

@@ -18,6 +18,7 @@ const collectionSchema = new mongoose.Schema(
     },
     packages: [{ type: mongoose.Schema.Types.ObjectId, ref: "Package" }],
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    profileId: { type: mongoose.Schema.Types.ObjectId, ref: "Profile" },
   },
   {
     timestamps: true,
