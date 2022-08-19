@@ -32,7 +32,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:3000",
+        url: "https://nice-package-man.herokuapp.com/",
       },
     ],
   },
