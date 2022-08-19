@@ -84,3 +84,4 @@ An easy way to keep track of and share some of the NPM packages that I've used i
 - Express
 - Passport for Oauth
 - Bootstrap
+- MongoDB with mongoose
