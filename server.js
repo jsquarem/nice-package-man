@@ -11,8 +11,6 @@ const methodOverride = require("method-override");
 const bodyParser = require("body-parser");
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
-//const cors = require('cors');
-//const helmet = require('helmet');
 // Routes
 const indexRouter = require("./routes/index");
 const collectionsRouter = require("./routes/collections");
@@ -24,7 +22,7 @@ const profilesRouter = require("./routes/profiles");
 
 const Profile = require("./models/profile");
 
-const options = {
+const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
     info: {
@@ -40,7 +38,7 @@ const options = {
   },
   apis: ["./routes/api.js"],
 };
-const specs = swaggerJsDoc(options);
+const specs = swaggerJsDoc(swaggerOptions);
 
 // create the Express app
 const app = express();
@@ -79,7 +77,6 @@ const getProfile = async (id) => {
   return profile;
 };
 
-// Add this middleware BELOW passport middleware
 app.use(async function (req, res, next) {
   res.locals.user = req.user;
   if (typeof req.user != "undefined")
@@ -98,9 +95,7 @@ app.use("/", snippetsRouter);
 app.use("/api", apiRouter);
 app.use("/profiles", profilesRouter);
 
-//app.use(helmet());
 app.use(bodyParser.json());
-//app.use(cors());
 
 // invalid request, send 404 page
 app.use(function (req, res) {
